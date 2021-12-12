@@ -1,4 +1,4 @@
-const JwStrategy = require('passport-jwt');
+const JwStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const keys = require('./keys');
 const Profile = require('../models/Profile');

@@ -3,14 +3,13 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const Profile = require('../models/Profile');
 const router = express.Router();
-const isEmpty = require('../validation/isEmpty');
 const valiDatorRegister = require('../validation/profile');
 
 
 //@router /register
 //@desc. post Register new user
 //@access Public
-router.post('/register', (req, res) => {
+router.post('/', (req, res) => {
   // validate input
   const {errors, isValid } = valiDatorRegister(req.body);
   if(!isValid) {
@@ -34,22 +33,21 @@ router.post('/register', (req, res) => {
         password: req.body.password,
         avatar
       }
+      console.log(newUser)
       // hash password
       bcrypt.genSalt(10, (err, salt) => {
-        if (err) throw err;
+        if (err) console.log('Error in bcrypt');
         bcrypt.hash(req.body.password, salt, (err, hash) => {
-          if (err) throw err;
+          if (err) console.log('Error in hash');
           newUser.password = hash;
           newUser.save()
           .then(user => res.json(user))
-          .catch(err => console.log(err));
+          .catch(() => console.log('Error here!'));
         });
       });
     }
   })
-  .catch(err => console.log(err));
-
-  
+  .catch(() => console.log('error'));
 
 });
 

@@ -11,7 +11,7 @@ const ProfileSchema = new Schema({
     require: true
   },
   password: {
-    type: Number,
+    type: String,
     require: true
   },
   avatar: {
