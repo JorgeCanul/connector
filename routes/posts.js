@@ -13,7 +13,6 @@ router.get('/post', (req, res) => {
     } else {
       res.status(400).json({message: 'No Post'})
     }
-    
   })
   .catch(err => console.log(err));
 
