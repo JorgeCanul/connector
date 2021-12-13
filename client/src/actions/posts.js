@@ -2,7 +2,7 @@ import axios from 'axios';
 import { CREATE, FETCH_ALL, GET_ERRORS } from './types';
 
 
-/// get all posts
+/// get all posts, Public
 export const getPosts = (data) => dispatch => {
   axios.get('/api/posts', data)
   .then(res => dispatch({
@@ -17,6 +17,7 @@ export const getPosts = (data) => dispatch => {
   });
 }
 
+// Create post, Private
 export const createPost = (post) => dispatch => {
   axios.post('/api/posts', post)
   .then(res => dispatch({
