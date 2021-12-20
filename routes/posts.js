@@ -7,7 +7,7 @@ const Profile = require('../models/Profile');
 //@router /api/posts/post
 //@desc. get all
 //@access Public
-router.get('/post', (req, res) => {
+router.get('/posts', (req, res) => {
   PostMessage.find()
   .sort({date: -1})
   .then(postMessages => {

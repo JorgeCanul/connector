@@ -9,8 +9,7 @@ import useStyles from './styles';
 
 function Post({ post }) {
    const classes = useStyles();
-   const tags = post.tags.map(tag => tag);
-   const space = <Typography>&nbsp;</Typography>
+
   return (
     <Card className={classes.card}>
       <CardMedia className={classes.media} image={post.selectedFile} title={post.title}/>
@@ -25,7 +24,7 @@ function Post({ post }) {
       </div>
       <div className={classes.details}>
       <Typography variant="body2" color="textSecondary">
-        {!tags ?  space : tags}
+        {post.tags.map(tag => tag)}
       </Typography>
       </div>
       <CardContent>

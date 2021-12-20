@@ -7,6 +7,8 @@ import Spinner from '../common/Spinner';
 import ProfileActions from './ProfileActions';
 import Experience from './Experience';
 import Education from './Education';
+// import Posts from '../Posts/posts';
+// import Post from '../Posts/Post/post';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -26,7 +28,7 @@ class Dashboard extends Component {
     if (profile === null || loading) {
       dashboardContent = <Spinner />;
     } else {
-      // Check if logged in user has profile data
+      // Check if logged and if user has profile data
       if (Object.keys(profile).length > 0) {
         dashboardContent = (
           <div>
@@ -43,6 +45,7 @@ class Dashboard extends Component {
             >
               Delete My Account
             </button>
+            {/* <Posts /> */}
           </div>
         );
       } else {

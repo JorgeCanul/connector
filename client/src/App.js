@@ -9,6 +9,8 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Landing from "./components/layout/landing";
 import Dashboard from "./components/dashboard/Dashboard";
+import Posts from "./components/Posts/posts";
+import Post from "./components/Posts/Post/post";
 import CreateProfile from "./components/create-profile/CreateProfile";
 import { logoutUser } from "./actions/authActions";
 import { SET_USER } from "./actions/types";
@@ -16,6 +18,7 @@ import PrivateRoute from "./components/common/PrivateRoute";
 
 import jwt_decode from 'jwt-decode';
 import setAuthToken from "./utils/setAuthToken";
+import Form from "./components/Form/form";
 
 if(localStorage.jwtToken) {
   //decode 
@@ -56,6 +59,15 @@ if(localStorage.jwtToken) {
         <PrivateRoute exact path="/create-profile" 
         component={CreateProfile}
         />
+      </Switch>
+      <Switch>
+        <PrivateRoute exact path="/feed" component={Posts} />
+      </Switch>
+      <Switch>
+        <PrivateRoute exact path="/post/:id" component={Post} />
+      </Switch>
+      <Switch>
+        <PrivateRoute exact path="/feed" component={Form} />
       </Switch>
     </BrowserRouter>
     </Provider>
