@@ -1,62 +1,38 @@
 import React, { Component } from 'react';
-import { Container, AppBar, Typography, Grow, Grid} from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import memories from '../../img/memories.jpg';
-import Posts from '../Posts/posts';
-import Form from '../Form/form';
-import { getPosts } from '../../actions/posts';
 
  class Landing extends Component {
-   componentDidMount() {
-    this.props.getPosts();
-   }
-
+   
+  componentDidMount() {
+    if(this.props.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
+    }
+  }
    render() {
-   const makeStyles = {
-      appBar: {
-        borderRadius: 15,
-        margin: '0 0',
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-      },
-      heading: {
-        color: 'rgba(0,183,255, 1)',
-      },
-      image: {
-        marginLeft: '15px',
-      },
-    };
-
     return (
-      
-      <Container maxidth="lg">
-        <AppBar style={makeStyles.appBar} color="inherit">
-          <Typography style={makeStyles.heading} variant="h2" alingn="center">
-            Memories
-          </Typography>
-          <img style={makeStyles.image}  src={memories} alt="memories" height="90"/>
-        </AppBar>
-        <div style={{paddingTop: '6.635rem'}}>
-        {/* <Container> */}
-          <Grid container justifyContent="space-between" alignItems="stretch" spacing={3}>
-            <Grid item xs={12} sm={7}>
-              <Posts />
-            </Grid>
-            <Grid item xs={12} sm={4}>
-              <Form />
-            </Grid>
-          </Grid>
-        {/* </Container> */}
-
+      <div className='landing'>
+        <div className='dark-overlay landing-inner'>
+          <div className='container'>
+            <div className='row'>
+              <div className='col-md-12 text-center'>
+                <h1 className='display-3 mb-4'>Developer Connector</h1>
+                <p className='laed'>Create Your Profile, share posts and get to know developers</p>
+                <hr/>
+                <Link to="/register" className='btn btn-lg btn-info mr-2'>Sign Up</Link>
+                <Link to="/login" className='btn btn-lg btn-light'>Login</Link>
+              </div>
+            </div>
+          </div>
         </div>
-
-      </Container>
+      </div>
     )
    }
 };
 
+const mapToStateProps = state => ({
+  errors: state.errors,
+  auth: state.auth
+})
 
-
-export default connect(null, {getPosts})(Landing);
+export default connect(mapToStateProps, {})(Landing);

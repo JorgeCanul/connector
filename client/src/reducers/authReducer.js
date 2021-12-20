@@ -2,8 +2,8 @@ import isEmpty from '../validation/isEmpty';
 import { SET_USER } from '../actions/types';
 
 const initialState = {
-  isAuthenticated: false,
-  usr: {}
+  isAuthenticated: false, 
+  user: {}
 };
 
 export default function(state = initialState, action) {

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE, FETCH_ALL, GET_ERRORS } from './types';
+import { CREATE_POST, FETCH_ALL, GET_ERRORS } from './types';
 
 
 /// get all posts, Public
@@ -21,7 +21,7 @@ export const getPosts = (data) => dispatch => {
 export const createPost = (post) => dispatch => {
   axios.post('/api/posts', post)
   .then(res => dispatch({
-    type: CREATE,
+    type: CREATE_POST,
     payload: res.data
   }))
   .catch(err => console.log(err));

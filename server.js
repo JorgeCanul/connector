@@ -3,8 +3,9 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 
 const keys = require('./config/keys');
-const postRoutes = require('./routes/posts');
-const registerRouter = require('./routes/profile');
+const postRouter = require('./routes/posts');
+const registerRouter = require('./routes/users');
+const profileRouter = require('./routes/profile');
 const cors = require('cors');
 const app = express();
 
@@ -24,15 +25,16 @@ mongoose.connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => console.log('Data base connected'))
 .catch(() => console.log('Data base error'));
 
-
-
-// Routes config
-app.use('/api/posts', postRoutes);
-app.use('/api/user', registerRouter);
-
 //Passport conf.
+// Make sure to initialize passport before routes
 app.use(passport.initialize());
 require('./config/passport')(passport);
+
+// Routes config
+app.use('/api/posts', postRouter);
+app.use('/api/users', registerRouter);
+app.use('/api/profile', profileRouter);
+
 
 
 const PORT = process.env.PORT || 5000;
