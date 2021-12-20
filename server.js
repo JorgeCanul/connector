@@ -23,7 +23,7 @@ app.use(cors());
 const db = keys.mongoURI;
 mongoose.connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => console.log('Data base connected'))
-.catch(() => console.log('Data base error'));
+.catch((err) => console.log(err));
 
 //Passport conf.
 // Make sure to initialize passport before routes

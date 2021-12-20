@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
-import Landing from "./components/layout/landing";
+
 import store from './store';
 
 import Navbar from "./components/layout/Navbar";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
+import Landing from "./components/layout/landing";
+import Dashboard from "./components/dashboard/Dashboard";
+import CreateProfile from "./components/create-profile/CreateProfile";
 import { logoutUser } from "./actions/authActions";
 import { SET_USER } from "./actions/types";
+import PrivateRoute from "./components/common/PrivateRoute";
 
 import jwt_decode from 'jwt-decode';
 import setAuthToken from "./utils/setAuthToken";
@@ -44,6 +48,15 @@ if(localStorage.jwtToken) {
         <Route exact path="/" component={Landing}/>
         <Route exact path="/register"  component={Register}/>
         <Route exact path="/login" component={Login}/>
+        <Switch>
+         <PrivateRoute exact path="/dashboard" component={Dashboard} />
+       </Switch>
+
+       <Switch>
+        <PrivateRoute exact path="/create-profile" 
+        component={CreateProfile}
+        />
+      </Switch>
     </BrowserRouter>
     </Provider>
      )

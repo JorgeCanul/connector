@@ -47,9 +47,9 @@ export const logoutUser = () => dispatch => {
   localStorage.removeItem('jwtToken');
   //Remove token from axios header
   setAuthToken(false);
-  //Remove user from the redux store
+  //Reset user in the redux store
   dispatch({
     type: SET_USER,
-    payload: {}
-  })
-};
+    payload: {},
+  });
+}

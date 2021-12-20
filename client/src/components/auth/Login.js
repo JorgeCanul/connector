@@ -27,8 +27,9 @@ import {loginUser} from '../../actions/authActions';
 
    componentWillReceiveProps(nextProps) {
     if(nextProps.auth.isAuthenticated) {
-      this.props.history.push('/dashborad');
+      this.props.history.push('/dashboard');
     } 
+
     if(nextProps.errors) {
       this.setState({errors: nextProps.errors});
     }
