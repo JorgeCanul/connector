@@ -7,15 +7,16 @@ import moment from 'moment';
 
 import useStyles from './styles';
 
-function Post({ post }) {
+function Post({ posts }) {
+  console.log(posts)
    const classes = useStyles();
 
   return (
     <Card className={classes.card}>
-      <CardMedia className={classes.media} image={post.selectedFile} title={post.title}/>
+      <CardMedia className={classes.media} image={posts.selectedFile} title={posts.title}/>
       <div className={classes.overlay}>
-        <Typography variant="h6">{post.creator}</Typography>
-        <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
+        <Typography variant="h6">{posts.creator}</Typography>
+        <Typography variant="body2">{moment(posts.createdAt).fromNow()}</Typography>
       </div>
       <div className={classes.overlay2}>
         <Button style={{color: 'white'}} size="small" onClick={() => {}}>
@@ -24,16 +25,16 @@ function Post({ post }) {
       </div>
       <div className={classes.details}>
       <Typography variant="body2" color="textSecondary">
-        {post.tags.map(tag => tag)}
+        {posts.tags.map(tag => tag)}
       </Typography>
       </div>
       <CardContent>
-         <Typography className={classes.title} variant="h5" color="textSecondary" gutterBottom>{post.message}</Typography>
+         <Typography className={classes.title} variant="h5" color="textSecondary" gutterBottom>{posts.message}</Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
         <Button size="small" color="primary" onClick={() => {}}>
           <ThumbUpAltIcon fontSize="small"/>
-          Like {post.likeCount}
+          Like {posts.likeCount}
         </Button>
         <Button size="small" color="primary" onClick={() => {}}>
           <DeleteIcon fontSize="small"/>
