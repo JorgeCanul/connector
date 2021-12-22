@@ -5,7 +5,7 @@ const PostMessage = require('../models/PostMessage');
 //@router /posts
 //@desc. get POST
 //@access Public
-router.get('/post', (req, res) => {
+router.get('/posts', (req, res) => {
   PostMessage.find()
   .then(postMessages => {
     if(postMessages) {
@@ -21,7 +21,7 @@ router.get('/post', (req, res) => {
 //@router /posts
 //@desc. post POST
 //@access Public
-router.post('/post', (req, res) => {
+router.post('/posts', (req, res) => {
   const newPost = new PostMessage(req.body);
   newPost.save()
   .then(post => res.json(post))

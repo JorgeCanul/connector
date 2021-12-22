@@ -4,7 +4,7 @@ import { CREATE, FETCH_ALL, GET_ERRORS } from './types';
 
 /// get all posts
 export const getPosts = (data) => dispatch => {
-  axios.get('/api/posts', data)
+  axios.get('/api/posts/posts', data)
   .then(res => dispatch({
     type: FETCH_ALL,
     payload: res.data
@@ -18,7 +18,7 @@ export const getPosts = (data) => dispatch => {
 }
 
 export const createPost = (post) => dispatch => {
-  axios.post('/api/posts', post)
+  axios.post('/api/posts/posts', post)
   .then(res => dispatch({
     type: CREATE,
     payload: res.data
