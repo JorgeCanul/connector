@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Post from '../Posts/Post/post'
@@ -22,15 +23,15 @@ class Posts extends Component {
       postContent = <Spinner />;
     } else {
       postContent = (
-              <div container aligitems="stretch" spacing={3}>
+              <Grid container aligitems="stretch" spacing={3}>
                 {
                   post.map(post => (
-                    <div key={post._id} item xs={12} sm={6}>
+                    <Grid key={post._id} item xs={12} sm={6}>
                       <Post post={post}/>
-                    </div>
+                    </Grid>
                   ))
                 }
-              </div>
+              </Grid>
             );
     }
 
