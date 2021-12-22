@@ -6,7 +6,8 @@ import Post from '../Posts/Post/post'
 // import CommentForm from './CommentForm';
 // import CommentFeed from './CommentFeed';
 import Spinner from '../common/Spinner';
-import  { getPosts }  from '../../actions/posts'
+import  { getPosts }  from '../../actions/posts';
+
 
 class Posts extends Component {
   componentDidMount() {
@@ -14,20 +15,23 @@ class Posts extends Component {
   }
 
   render() {
-    const { posts, loading } = this.props.posts;
-    console.log(posts)
+    const { post, loading } = this.props.post;
     let postContent;
 
-    if (posts === undefined || loading || Object.keys(posts).length === 0) {
+    if (post === undefined || loading || Object.keys(post).length === 0) {
       postContent = <Spinner />;
     } else {
       postContent = (
-        <div>
-          <Post posts={posts} />
-          {/* <CommentForm postId={post._id} />
-          <CommentFeed postId={post._id} comments={post.comments} /> */}
-        </div>
-      );
+              <div container aligitems="stretch" spacing={3}>
+                {
+                  post.map(post => (
+                    <div key={post._id} item xs={12} sm={6}>
+                      <Post post={post}/>
+                    </div>
+                  ))
+                }
+              </div>
+            );
     }
 
     return (
@@ -49,11 +53,38 @@ class Posts extends Component {
 
 Posts.propTypes = {
   getPosts: PropTypes.func.isRequired,
-  posts: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  posts: state.posts
+  post: state.posts
 });
 
 export default connect(mapStateToProps, { getPosts })(Posts);
+
+
+// function Posts() {
+//   const  posts  = useSelector(state => state.posts);
+//   console.log(posts);
+  
+//    const classes = useStyles();
+//   return (
+//     !posts.length ? <CircularProgress /> : (
+//       <Grid className={classes.mainContainer} container aligitems="stretch" spacing={3}>
+//         {
+//           posts.map(post => (
+//             <Grid key={post._id} item xs={12} sm={6}>
+//               <Post post={post}/>
+//             </Grid>
+//           ))
+//         }
+//       </Grid>
+//     )
+//   )
+// };
+
+// // const mapStateToProps = state => ({
+// //   posts: state.posts
+// // });
+
+// export default Posts
