@@ -2,7 +2,7 @@ import { CREATE_POST, FETCH_ALL, GET_POST, DELETE_POST, POST_LOADING } from "../
 
 const initialState = {
   posts: [],
-  posts: {},
+  post: {},
   loading: false
 };
 
@@ -27,7 +27,7 @@ export default function(state = initialState, action ) {
     case CREATE_POST:
       return  {
         ...state,
-        posts: [action.payload, ...state.posts]
+        post: [action.payload, ...state.posts]
       }
     case DELETE_POST:
       return {

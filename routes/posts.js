@@ -23,7 +23,7 @@ router.get('/posts', (req, res) => {
 //@router /api/posts/post
 //@desc. crate post
 //@access Private
-router.post('/post', passport.authenticate('jwt',
+router.post('/posts', passport.authenticate('jwt',
  {session: false}), (req, res) => {
    const newPost = PostMessage({
       title: req.body.title,
