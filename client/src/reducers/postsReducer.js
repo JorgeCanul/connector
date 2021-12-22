@@ -1,41 +1,12 @@
-import { CREATE_POST, FETCH_ALL, GET_POST, DELETE_POST, POST_LOADING } from "../actions/types";
+import { CREATE_POST, FETCH_ALL } from "../actions/types";
 
-const initialState = {
-  posts: [],
-  post: {},
-  loading: false
-};
-
-export default function(state = initialState, action ) {
+export default function(posts = [], action ) {
   switch (action.type) {
-    case POST_LOADING:
-      return {
-        ...state,
-        loading: true
-      }
     case FETCH_ALL:
-      return {
-        ...state,
-        loading: false
-      }
-    case GET_POST:
-      return {
-        ...state,
-        loading: false
-      }
-
+      return action.payload;
     case CREATE_POST:
-      return  {
-        ...state,
-        post: [action.payload, ...state.posts]
-      }
-    case DELETE_POST:
-      return {
-        ...state,
-        posts: state.posts.filter(post => post._id !== action.payload)
-      }  
+      return [...posts, action.payload];
     default:
-      return state;
+      return posts;
   }
 }
-
