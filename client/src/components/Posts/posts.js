@@ -6,19 +6,24 @@ import Post from '../Posts/Post/post'
 // import CommentForm from './CommentForm';
 // import CommentFeed from './CommentFeed';
 import Spinner from '../common/Spinner';
-import  { getPosts }  from '../../actions/posts'
+import  { getPosts }  from '../../actions/postsActions'
 
 class Posts extends Component {
   componentDidMount() {
-    this.props.getPosts(this.props.match.params.id);
+    this.props.getPosts();
   }
 
   render() {
     const { posts, loading } = this.props.posts;
-    console.log(posts)
+    // console.log(typeof posts );
     let postContent;
-
-    if (posts === undefined || loading || Object.keys(posts).length === 0) {
+  // for (const items of Object.entries(posts)) {
+  //   for (const [index, item] of  Object.entries(items)){
+  //      postContent = item;
+  //   }
+  // }
+  // console.log(postContent)
+    if (posts.length <= 0 || loading || !Object.entries(posts)) {
       postContent = <Spinner />;
     } else {
       postContent = (

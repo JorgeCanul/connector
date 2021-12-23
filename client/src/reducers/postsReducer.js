@@ -2,7 +2,7 @@ import { CREATE_POST, FETCH_ALL, GET_POST, DELETE_POST, POST_LOADING } from "../
 
 const initialState = {
   posts: [],
-  posts: {},
+  post: {},
   loading: false
 };
 
