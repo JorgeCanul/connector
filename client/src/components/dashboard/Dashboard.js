@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
+import { getCurrentProfile, deleteAccount, getProfiles } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
 import ProfileActions from './ProfileActions';
 import Experience from './Experience';
 import Education from './Education';
-// import Posts from '../Posts/posts';
-// import Post from '../Posts/Post/post';
+
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -22,6 +21,7 @@ class Dashboard extends Component {
   render() {
     const { user } = this.props.auth;
     const { profile, loading } = this.props.profile;
+    // const { profiles } = this.props.profile
 
     let dashboardContent;
 
@@ -45,7 +45,6 @@ class Dashboard extends Component {
             >
               Delete My Account
             </button>
-            {/* <Posts /> */}
           </div>
         );
       } else {
@@ -79,16 +78,19 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
+  getProfiles: PropTypes.func.isRequired,
   deleteAccount: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
+  // profiles: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   profile: state.profile,
+  // profiles: state.profiles,
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(
+export default connect(mapStateToProps, { getCurrentProfile, getProfiles, deleteAccount })(
   Dashboard
 );

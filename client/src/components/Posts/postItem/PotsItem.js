@@ -7,19 +7,15 @@ import moment from 'moment';
 import useStyles from './styles';
 
 function Post({ posts }) {
-  let postContent;
-  for (const items of Object.entries(posts)) {
-    for (const [index, item] of  Object.entries(items)){
-       postContent = item;
-    }
-  }
+  
+  console.log(typeof posts);
    const classes = useStyles();
   return (
     <Card className={classes.card}>
-      <CardMedia className={classes.media} image={postContent.selectedFile} title={postContent.title}/>
+      <CardMedia className={classes.media} image={posts.selectedFile} title={posts.title}/>
       <div className={classes.overlay}>
-        <Typography variant="h6">{postContent.creator}</Typography>
-        <Typography variant="body2">{moment(postContent.createdAt).fromNow()}</Typography>
+        <Typography variant="h6">{posts.creator}</Typography>
+        <Typography variant="body2">{moment(posts.createdAt).fromNow()}</Typography>
       </div>
       <div className={classes.overlay2}>
         <Button style={{color: 'white'}} size="small" onClick={() => {}}>
@@ -28,16 +24,16 @@ function Post({ posts }) {
       </div>
       <div className={classes.details}>
       <Typography variant="body2" color="textSecondary">
-        {`#${postContent.tags.map(tag => tag)}`}
+        {`#${posts.tags.map(tag => tag)}`}
       </Typography>
       </div>
       <CardContent>
-         <Typography className={classes.title} variant="h5" color="textSecondary" gutterBottom>{postContent.message}</Typography>
+         <Typography className={classes.title} variant="h5" color="textSecondary" gutterBottom>{posts.message}</Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
         <Button size="small" color="primary" onClick={() => {}}>
           <ThumbUpAltIcon fontSize="small"/>
-          Like {postContent.likeCount}
+          Like {posts.likeCount}
         </Button>
         <Button size="small" color="primary" onClick={() => {}}>
           <DeleteIcon fontSize="small"/>
