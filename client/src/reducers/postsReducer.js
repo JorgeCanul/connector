@@ -17,6 +17,7 @@ export default function(state = initialState, action ) {
     case GET_POST:
       return {
         ...state,
+        posts: action.payload,
         loading: false
       }
     case GET_POSTS:
@@ -28,7 +29,7 @@ export default function(state = initialState, action ) {
       case CREATE_POST:
       return  {
         ...state,
-        posts: [...state.posts, state.post]
+        posts: [action.payload, ...state.posts]
 
       }
     case DELETE_POST:

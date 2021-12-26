@@ -4,10 +4,10 @@ const router = express.Router();
 const PostMessage = require('../models/PostMessage');
 const Profile = require('../models/Profile');
 
-//@router /api/posts/post
+//@router /api/posts/posts/
 //@desc. get all
-//@access Public
-router.get('/posts', (req, res) => {
+//@access Private
+router.get('/posts', passport.authenticate('jwt', {session: false}), (req, res) => {
   PostMessage.find()
   .sort({date: -1})
   .then(postMessages => {

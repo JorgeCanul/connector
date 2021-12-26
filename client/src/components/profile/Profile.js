@@ -27,7 +27,6 @@ class Profile extends Component {
   render() {
     const { profile, loading } = this.props.profile;
 
-
     let profileContent;
 
     if (profile === null || loading) {
@@ -71,11 +70,11 @@ class Profile extends Component {
 
 Profile.propTypes = {
   getProfileByHandle: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
-  profile: state.profile
+  profile: state.profile,
 });
 
 export default connect(mapStateToProps, { getProfileByHandle })(Profile);

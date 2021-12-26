@@ -11,27 +11,16 @@ import  { getPosts }  from '../../actions/postsActions'
 class Posts extends Component {
   componentDidMount() {
     this.props.getPosts();
-    // this.props.getPost(this.props.match.params.id);
   }
-
-  // componentDidMount() {
-  //   this.props.getPost(this.props.match.params.id);
-  // }
 
   render() {
     const { posts, loading } = this.props.posts;
-    // console.log(posts);
+    console.log(posts)
     let postContent;
     if (posts.length <= 0 || loading || !Object.entries(posts)) {
       postContent = <Spinner />;
     } else {
-
-        for (const items of Object.entries(posts)) {
-          for (const [index, posts] of  Object.values(items)){
-            postContent = <Post posts={posts} />
-          }
-        }
-      ;
+        postContent = <Post posts={posts} />
     }
 
     return (
@@ -53,11 +42,13 @@ class Posts extends Component {
 
 Posts.propTypes = {
   getPosts: PropTypes.func.isRequired,
-  posts: PropTypes.object.isRequired
+  posts: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  posts: state.posts
+  posts: state.posts,
+  auth: state.auth
 });
 
 export default connect(mapStateToProps, { getPosts })(Posts);

@@ -7,10 +7,10 @@ import { CREATE_POST, FETCH_ALL, GET_ERRORS, GET_POSTS, POST_LOADING, GET_POST }
 export const getPosts = () => dispatch => {
   dispatch(setPostLoading());
   axios
-    .get('/api/posts/posts')
+    .get(`/api/posts/posts/`)
     .then(res =>
       dispatch({
-        type: FETCH_ALL,
+        type: GET_POSTS,
         payload: res.data
       })
     )
@@ -50,6 +50,8 @@ export const getPost = id => dispatch => {
       })
     );
 };
+
+
 
 // Set loading state
 export const setPostLoading = () => {
