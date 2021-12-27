@@ -6,10 +6,10 @@ import ProfileHeader from './ProfileHeader';
 import ProfileAbout from './ProfileAbout';
 import ProfileCreds from './ProfileCreds';
 import ProfileGithub from './ProfileGithub';
+import Form from '../Form/form';
 import Spinner from '../common/Spinner';
-import Posts from '../Posts/Posts';
-// import { getPosts } from '../../actions/postsActions';
 import { getProfileByHandle } from '../../actions/profileActions';
+
 
 class Profile extends Component {
   componentDidMount() {
@@ -60,7 +60,7 @@ class Profile extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">{profileContent}</div>
-            <Posts />
+            <Form />
           </div>
         </div>
       </div>

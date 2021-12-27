@@ -64,15 +64,15 @@ if(localStorage.jwtToken) {
         component={CreateProfile}
         />
       </Switch>
-      {/* <Switch>
+      <Switch>
         <PrivateRoute exact path="/feed" component={Posts} />
-      </Switch> */}
+      </Switch>
       <Switch>
         <PrivateRoute exact path="/post/:id" component={Post} />
       </Switch>
-      <Switch>
+      {/* <Switch>
         <PrivateRoute exact path="/feed" component={Form} />
-      </Switch>
+      </Switch> */}
     </BrowserRouter>
     </Provider>
      )

@@ -12,14 +12,14 @@ const Form = ({ currentId, setCurrentId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  // useEffect(() => {
-  //   if (post) setPostData(post);
-  // }, [post]);
+  useEffect(() => {
+    if (post) setPostData(post);
+  }, [post]);
 
-  // const clear = () => {
-  //   setCurrentId(0);
-  //   setPostData({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
-  // };
+  const clear = () => {
+    setCurrentId(0);
+    setPostData({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();

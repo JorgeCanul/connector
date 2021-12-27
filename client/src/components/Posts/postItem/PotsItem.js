@@ -7,80 +7,55 @@ import moment from 'moment';
 import useStyles from './styles';
 import Spinner from '../../common/Spinner';
 
+
 function Post({ posts }) {
+  // console.log(typeof posts )
+  console.log(posts.name)
   let item;
-  
   const classes = useStyles();
-  if(posts === null ) {
+  if(posts === null || !Object.keys(posts)) {
     item = <Spinner />
   } else {
-    for (const [ index, items ] of Object.entries(posts)){
 
-    item = (<Card key={items._id} className={classes.card}>
-        <CardMedia className={classes.media} image={items.selectedFile} title={items.title}/>
-        <div className={classes.overlay}>
-          <Typography variant="h6">{items.creator}</Typography>
-          <Typography variant="body2">{moment(items.createdAt).fromNow()}</Typography>
-        </div>
-        <div className={classes.overlay2}>
-          <Button style={{color: 'white'}} size="small" onClick={() => {}}>
-            <MoreHorizIcon fontSize="medium"/>
-          </Button>
-        </div>
-        <div className={classes.details}>
-        {/* <Typography variant="body2" color="textSecondary">
-          {`#${items.tags.map(tag => tag)}`}
-        </Typography> */}
-        </div>
-        <CardContent>
-           <Typography className={classes.title} variant="h5" color="textSecondary" gutterBottom>{items.message}</Typography>
-        </CardContent>
-        <CardActions className={classes.cardActions}>
-          <Button size="small" color="primary" onClick={() => {}}>
-            <ThumbUpAltIcon fontSize="small"/>
-            Like {items.likeCount}
-          </Button>
-          <Button size="small" color="primary" onClick={() => {}}>
-            <DeleteIcon fontSize="small"/>
-            Delete
-          </Button>
-        </CardActions>
-      </Card>);
-    }
+    posts.map(el => console.log(el));
+    item = posts.map((el, index) => 
+    <Card key={index} className={classes.card}>
+      <CardMedia className={classes.media} image={el.selectedFile} title={el.title}/>
+      <div className={classes.overlay}>
+        <Typography variant="h6">{el.creator}</Typography>
+        <Typography variant="body2">{moment(el.createdAt).format()}</Typography>
+      </div>
+      <div className={classes.overlay2}>
+        <Button style={{color: 'white'}} size="small" onClick={() => {}}>
+          <MoreHorizIcon fontSize="medium"/>
+        </Button>
+      </div>
+      <div className={classes.details}>
+      <Typography variant="body2" color="textSecondary">
+        {`#${el.tags.map(tag => tag)}`}
+      </Typography>
+      </div>
+      <CardContent>
+         <Typography className={classes.title} variant="h5" color="textSecondary" gutterBottom>{el.message}</Typography>
+      </CardContent>
+      <CardActions className={classes.cardActions}>
+        <Button size="small" color="primary" onClick={() => {}}>
+          <ThumbUpAltIcon fontSize="small"/>
+          Like {el.likeCount}
+        </Button>
+        <Button size="small" color="primary" onClick={() => {}}>
+          <DeleteIcon fontSize="small"/>
+          Delete
+        </Button>
+      </CardActions>
+    </Card>
+    );
+    
   }
    
   return (
-    // <Card className={classes.card}>
-    //   <CardMedia className={classes.media} image={posts.selectedFile} title={posts.title}/>
-    //   <div className={classes.overlay}>
-    //     <Typography variant="h6">{posts.creator}</Typography>
-    //     <Typography variant="body2">{moment(posts.createdAt).fromNow()}</Typography>
-    //   </div>
-    //   <div className={classes.overlay2}>
-    //     <Button style={{color: 'white'}} size="small" onClick={() => {}}>
-    //       <MoreHorizIcon fontSize="medium"/>
-    //     </Button>
-    //   </div>
-    //   <div className={classes.details}>
-    //   {/* <Typography variant="body2" color="textSecondary">
-    //     {`#${posts.tags.map(tag => tag)}`}
-    //   </Typography> */}
-    //   </div>
-    //   <CardContent>
-    //      <Typography className={classes.title} variant="h5" color="textSecondary" gutterBottom>{posts.message}</Typography>
-    //   </CardContent>
-    //   <CardActions className={classes.cardActions}>
-    //     <Button size="small" color="primary" onClick={() => {}}>
-    //       <ThumbUpAltIcon fontSize="small"/>
-    //       Like {posts.likeCount}
-    //     </Button>
-    //     <Button size="small" color="primary" onClick={() => {}}>
-    //       <DeleteIcon fontSize="small"/>
-    //       Delete
-    //     </Button>
-    //   </CardActions>
-    // </Card>
-    {item}
+    
+    <div>{item}</div>
   )
  
 };
