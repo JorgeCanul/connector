@@ -5,22 +5,6 @@ const PostMessage = require('../models/PostMessage');
 const Profile = require('../models/Profile');
 
 //@router /api/posts/post
-//@desc. get all
-//@access Public
-router.get('/posts', (req, res) => {
-  PostMessage.find()
-  .sort({date: -1})
-  .then(postMessages => {
-    if(postMessages) {
-      res.status(200).json(postMessages);
-    } else {
-      res.status(400).json({message: 'No Post'})
-    }
-  })
-  .catch(err => console.log(err));
-});
-
-//@router /api/posts/post
 //@desc. crate post
 //@access Private
 router.post('/posts', passport.authenticate('jwt',
@@ -37,6 +21,23 @@ router.post('/posts', passport.authenticate('jwt',
   .then(post => res.json(post))
   .catch(()=> console.log('Error here'));
 });
+
+//@router /api/posts/posts/
+//@desc. get all
+//@access Public
+router.get('/posts', (req, res) => {
+  PostMessage.find()
+  .sort({date: -1})
+  .then(postMessages => {
+    if(postMessages) {
+      res.status(200).json(postMessages);
+    } else {
+      res.status(400).json({message: 'No Post'})
+    }
+  })
+  .catch(err => console.log(err));
+});
+
 
 // @route   GET api/posts/post/:id
 // @desc    Get post by id

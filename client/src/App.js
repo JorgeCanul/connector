@@ -7,10 +7,12 @@ import store from './store';
 import Navbar from "./components/layout/Navbar";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
+import Profiles from "./components/profiles/Profiles";
+import Profile from './components/profile/Profile';
 import Landing from "./components/layout/landing";
 import Dashboard from "./components/dashboard/Dashboard";
 import Posts from "./components/Posts/posts";
-import Post from "./components/Posts/Post/post";
+import Post from "./components/Posts/postItem/PotsItem";
 import CreateProfile from "./components/create-profile/CreateProfile";
 import { logoutUser } from "./actions/authActions";
 import { SET_USER } from "./actions/types";
@@ -51,6 +53,8 @@ if(localStorage.jwtToken) {
         <Route exact path="/" component={Landing}/>
         <Route exact path="/register"  component={Register}/>
         <Route exact path="/login" component={Login}/>
+        <Route exact path="/profiles" component={Profiles} />
+        <Route exact path="/profile/:handle" component={Profile} />
         <Switch>
          <PrivateRoute exact path="/dashboard" component={Dashboard} />
        </Switch>
@@ -66,9 +70,9 @@ if(localStorage.jwtToken) {
       <Switch>
         <PrivateRoute exact path="/post/:id" component={Post} />
       </Switch>
-      <Switch>
+      {/* <Switch>
         <PrivateRoute exact path="/feed" component={Form} />
-      </Switch>
+      </Switch> */}
     </BrowserRouter>
     </Provider>
      )
