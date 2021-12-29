@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Post from './postItem/PotsItem'
+import PostItem from './postItem/PostItem'
 // import CommentForm from './CommentForm';
 // import CommentFeed from './CommentFeed';
 import Spinner from '../common/Spinner';
@@ -19,7 +19,7 @@ class Posts extends Component {
     if (posts.length <= 0 || loading || !Object.entries(posts)) {
       postContent = <Spinner />;
     } else {
-        postContent = <Post posts={posts} />
+        postContent = <PostItem posts={posts} />
     }
 
     return (

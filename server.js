@@ -36,7 +36,7 @@ app.use(passport.initialize());
 require('./config/passport')(passport);
 
 // Routes config
-app.use('/api/posts', postRouter);
+app.use('/api/post', postRouter);
 app.use('/api/users', registerRouter);
 app.use('/api/profile', profileRouter);
 

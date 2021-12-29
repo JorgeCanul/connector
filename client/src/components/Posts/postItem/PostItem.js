@@ -8,7 +8,7 @@ import useStyles from './styles';
 import Spinner from '../../common/Spinner';
 
 
-function Post({ posts }) {
+function PostItem({ posts }) {
   // console.log(typeof posts )
   console.log(posts.name)
   let item;
@@ -50,14 +50,11 @@ function Post({ posts }) {
       </CardActions>
     </Card>
     );
-    
   }
-   
   return (
-    
     <div>{item}</div>
   )
  
 };
 
-export default Post
+export default PostItem
