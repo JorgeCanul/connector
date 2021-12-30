@@ -10,13 +10,13 @@ const Profile = require('../models/Profile');
 router.post('/posts', passport.authenticate('jwt',
  {session: false}), (req, res) => {
    const newPost = PostMessage({
+      user: req.user.id,
       title: req.body.title,
       message: req.body.message,
       creator: req.body.creator,
       tags: req.body.tags,
       selectedFile: req.body.selectedFile
    });
-
   newPost.save()
   .then(post => res.json(post))
   .catch(()=> console.log('Error here'));
@@ -27,6 +27,7 @@ router.post('/posts', passport.authenticate('jwt',
 //@access Public
 router.get('/posts', (req, res) => {
   PostMessage.find()
+  .populate("user", ["name", "avatar", "email"])
   .sort({date: -1})
   .then(postMessages => {
     if(postMessages) {
@@ -38,6 +39,28 @@ router.get('/posts', (req, res) => {
   .catch(err => console.log(err));
 });
 
+////////////////////////////////////////////////////
+//@router /api/posts/posts
+//@desc. get all posts by individual
+//@access Public
+router.get("/posts/:id", (req, res) => {
+  const errors = {};
+  PostMessage.find({ user: req.params.id})
+    .sort({date: -1})
+    .populate("user", ["name", "avatar"])
+    .then((posts) => {
+      if (!posts) {
+        errors.noposts = "There is no Posts for this user";
+        return res.status(404).json(errors);
+      } 
+        return res.status(200).json(posts)
+    })
+    .catch((err) =>
+      res.status(404).json({ profile: "There is no profile for this user" })
+    );
+});
+
+////////////////////////////////////////////////////
 
 // @route   GET api/posts/post/:id
 // @desc    Get post by id

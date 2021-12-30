@@ -7,7 +7,7 @@ import { CREATE_POST, FETCH_ALL, GET_ERRORS, GET_POSTS, POST_LOADING, GET_POST }
 export const getPosts = () => dispatch => {
   dispatch(setPostLoading());
   axios
-    .get(`/api/posts/posts/`)
+    .get(`/api/post/posts/`)
     .then(res =>
       dispatch({
         type: GET_POSTS,
@@ -24,7 +24,7 @@ export const getPosts = () => dispatch => {
 
 // Create post, Private
 export const createPost = (post) => dispatch => {
-  axios.post('/api/posts/posts', post)
+  axios.post('/api/post/posts', post)
   .then(res => dispatch({
     type: CREATE_POST,
     payload: res.data
@@ -36,7 +36,7 @@ export const createPost = (post) => dispatch => {
 export const getPost = id => dispatch => {
   dispatch(setPostLoading());
   axios
-    .get(`/api/posts/${id}`)
+    .get(`/api/post/${id}`)
     .then(res =>
       dispatch({
         type: GET_POST,
