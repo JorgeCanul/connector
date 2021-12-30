@@ -67,9 +67,9 @@ if(localStorage.jwtToken) {
       <Switch>
         <PrivateRoute exact path="/feed" component={Posts} />
       </Switch>
-      <Switch>
+      {/* <Switch>
         <PrivateRoute exact path="/post/:id" component={PostItem} />
-      </Switch>
+      </Switch> */}
       {/* <Switch>
         <PrivateRoute exact path="/feed" component={Form} />
       </Switch> */}
