@@ -8,13 +8,17 @@ import ProfileCreds from './ProfileCreds';
 import ProfileGithub from './ProfileGithub';
 import Form from '../Form/form';
 import Spinner from '../common/Spinner';
-import { getProfileByHandle } from '../../actions/profileActions';
+import {  getCurrentProfile } from '../../actions/profileActions';
+
 
 
 class Profile extends Component {
   componentDidMount() {
-    if (this.props.match.params.handle) {
-      this.props.getProfileByHandle(this.props.match.params.handle);
+    // if (this.props.match.params.handle) {
+    //   this.props.getProfileByHandle(this.props.match.params.handle);
+    // }
+    if(this.props.auth.isAuthenticated) {
+      this.props.getCurrentProfile();
     }
   }
 
@@ -27,8 +31,11 @@ class Profile extends Component {
   render() {
     const { profile, loading } = this.props.profile;
 
-    let profileContent;
+    const { isAuthenticated } = this.props.auth
+    console.log(isAuthenticated)
 
+    let profileContent;
+    let form = isAuthenticated ? <Form /> : null;
     if (profile === null || loading) {
       profileContent = <Spinner />;
     } else {
@@ -60,7 +67,7 @@ class Profile extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">{profileContent}</div>
-            <Form />
+            {form}
           </div>
         </div>
       </div>
@@ -69,12 +76,15 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
-  getProfileByHandle: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
+  // getProfileByHandle: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   profile: state.profile,
+  auth: state.auth
 });
 
-export default connect(mapStateToProps, { getProfileByHandle })(Profile);
+export default connect(mapStateToProps, { getCurrentProfile })(Profile);

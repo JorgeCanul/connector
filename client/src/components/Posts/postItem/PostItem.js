@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
@@ -14,7 +15,7 @@ class PostItem extends Component {
   render() {
     const { posts } = this.props;
     const { profiles } = this.props
-    console.log(profiles)
+    // console.log(profiles)
     let post;
     const classes = {
       media: {
@@ -69,15 +70,14 @@ class PostItem extends Component {
     if(posts === null || !Object.keys(posts)) {
       post = <Spinner />
     } else {
-  
-      posts.map(el => console.log(el));
-      //  profiles.map(el => console.log());
-
+      posts.map(el => console.log(el))
+     
+    
       post = posts.map((el, index) => 
       <Card key={el._id} style={classes.card}>
         <CardMedia style={classes.media} image={el.selectedFile} title={el.title}/>
         <div style={classes.overlay}>
-          <Typography variant="h6">{el.user.name}</Typography>
+          <Typography variant="h6"><Link to={`/posts/${el._id}`}>{el.user.name}</Link></Typography>
           <Typography variant="body2">{moment(el.createdAt).format()}</Typography>
         </div>
         <div style={classes.overlay2}>
@@ -115,4 +115,7 @@ class PostItem extends Component {
 };
 
 
-export default PostItem
+export default PostItem;
+  //  profiles.map(el => console.log());
+      // to={`/profile/${el.user.handle}`}
+      // to={`/profile/${profiles.handle}`}

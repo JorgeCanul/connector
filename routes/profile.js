@@ -76,7 +76,7 @@ router.post("/",
 // @access  Private
 router.get(
   "/",
-  passport.authenticate("jwt", { session: false }),
+ 
   (req, res) => {
     const errors = {};
 
@@ -134,7 +134,7 @@ router.get("/user/:user_id", (req, res) => {
 // @route   GET api/profile/handle/:handle
 // @desc    Get profile by handle
 // @access  Public
-router.get("/handle/:handle", (req, res) => {
+router.get("/handle/:handle", passport.authenticate('jwt', {session: false}), (req, res) => {
   const errors = {};
   Profile.findOne({ handle: req.params.handle })
     .populate("user", ["name", "avatar"])

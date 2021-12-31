@@ -45,6 +45,7 @@ router.get('/posts', (req, res) => {
 //@access Public
 router.get("/posts/:id", (req, res) => {
   const errors = {};
+
   PostMessage.find({ user: req.params.id})
     .sort({date: -1})
     .populate("user", ["name", "avatar"])
