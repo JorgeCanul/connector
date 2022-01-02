@@ -45,7 +45,7 @@ router.get('/posts', (req, res) => {
 //@access Public
 router.get("/posts/:id", (req, res) => {
   const errors = {};
-
+  passport.authenticate('jwt', {session: false}),
   PostMessage.find({ user: req.params.id})
     .sort({date: -1})
     .populate("user", ["name", "avatar"])

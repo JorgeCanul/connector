@@ -14,10 +14,11 @@ import ProfileItem from '../../profiles/ProfileItem';
 class PostItem extends Component {
 
   render() {
+    const { id } = this.props
+    console.log(id)
     const { posts } = this.props;
-    const { profiles } = this.props
+    // const { profiles } = this.props
     // console.log(profiles)
-    // console.log(posts)
     let post;
     const classes = {
       media: {
@@ -72,15 +73,14 @@ class PostItem extends Component {
     if(posts === null || !Object.keys(posts)) {
       post = <Spinner />
     } else {
-      // posts.map(el => console.log(el.user.name))
-     
     
       post = posts.map((el, index) => 
       <Card key={el._id} style={classes.card}>
+        {/* {console.log(el._id)} */}
         <CardMedia style={classes.media} image={el.selectedFile} title={el.title}/>
         <div style={classes.overlay}>
           {/* ///////////////// check? to={`/posts/${el._id}`}*/}
-          <Typography variant="h6"><Link to={`/posts/${el._id}`}>{el.createdAt}</Link></Typography>
+          <Typography variant="h6">{el.title}</Typography>
           <Typography variant="body2">{moment(el.createdAt).format()}</Typography>
         </div>
         <div style={classes.overlay2}>

@@ -13,6 +13,7 @@ import Landing from "./components/layout/landing";
 import Dashboard from "./components/dashboard/Dashboard";
 import Posts from "./components/Posts/posts";
 import PostItem from "./components/Posts/postItem/PostItem";
+import Post from "./components/Posts/postItem/Post";
 import CreateProfile from "./components/create-profile/CreateProfile";
 import { logoutUser } from "./actions/authActions";
 import { SET_USER } from "./actions/types";
@@ -70,7 +71,9 @@ if(localStorage.jwtToken) {
       <Switch>
         <PrivateRoute exact path="/feed" component={Posts} />
       </Switch>
-     
+          {/* <Switch>
+              <PrivateRoute exact path="/posts/:id" component={Post} />
+          </Switch> */}
     </BrowserRouter>
     </Provider>
      )
