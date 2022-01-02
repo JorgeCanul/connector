@@ -14,9 +14,9 @@ import ProfileItem from '../../profiles/ProfileItem';
 class PostItem extends Component {
 
   render() {
-    const { id } = this.props
-    console.log(id)
-    const { posts } = this.props;
+    // const { id } = this.props
+    // console.log(id)
+    const { posts, loading } = this.props;
     // const { profiles } = this.props
     // console.log(profiles)
     let post;
@@ -70,17 +70,17 @@ class PostItem extends Component {
       justifyContent: 'space-between',
     }}
     
-    if(posts === null || !Object.keys(posts)) {
+    if(posts === null || !Object.keys(posts) || loading) {
       post = <Spinner />
     } else {
-    
+    console.log(posts)
       post = posts.map((el, index) => 
       <Card key={el._id} style={classes.card}>
         {/* {console.log(el._id)} */}
         <CardMedia style={classes.media} image={el.selectedFile} title={el.title}/>
         <div style={classes.overlay}>
           {/* ///////////////// check? to={`/posts/${el._id}`}*/}
-          <Typography variant="h6">{el.title}</Typography>
+          <Typography variant="h6">{el.user.name}</Typography>
           <Typography variant="body2">{moment(el.createdAt).format()}</Typography>
         </div>
         <div style={classes.overlay2}>
