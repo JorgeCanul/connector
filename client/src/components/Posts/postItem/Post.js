@@ -10,7 +10,7 @@ import Spinner from '../../common/Spinner';
 
 function Post({ posts }) {
   // console.log(typeof posts )
-  console.log(posts.name)
+  // console.log(posts.name)
   let item;
   const classes = useStyles();
   if(posts === null || !Object.keys(posts)) {

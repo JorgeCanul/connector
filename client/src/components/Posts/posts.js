@@ -21,7 +21,7 @@ class Posts extends Component {
     const { posts, loading } = this.props.posts;
     const { profiles } = this.props.profile;
 
-
+    console.log(posts)
     let postContent;
     if (posts.length <= 0 || loading || !Object.entries(posts)) {
       postContent = <Spinner />;

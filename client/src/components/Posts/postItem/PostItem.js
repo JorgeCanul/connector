@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
@@ -16,6 +17,7 @@ class PostItem extends Component {
     const { posts } = this.props;
     const { profiles } = this.props
     // console.log(profiles)
+    // console.log(posts)
     let post;
     const classes = {
       media: {
@@ -70,14 +72,15 @@ class PostItem extends Component {
     if(posts === null || !Object.keys(posts)) {
       post = <Spinner />
     } else {
-      posts.map(el => console.log(el))
+      // posts.map(el => console.log(el.user.name))
      
     
       post = posts.map((el, index) => 
       <Card key={el._id} style={classes.card}>
         <CardMedia style={classes.media} image={el.selectedFile} title={el.title}/>
         <div style={classes.overlay}>
-          <Typography variant="h6"><Link to={`/posts/${el._id}`}>{el.user.name}</Link></Typography>
+          {/* ///////////////// check? to={`/posts/${el._id}`}*/}
+          <Typography variant="h6"><Link to={`/posts/${el._id}`}>{el.createdAt}</Link></Typography>
           <Typography variant="body2">{moment(el.createdAt).format()}</Typography>
         </div>
         <div style={classes.overlay2}>
@@ -113,9 +116,14 @@ class PostItem extends Component {
  
   }
 };
+PostItem.propTypes = {
+  posts: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
+};
 
+// const mapStateToProps = (state) => ({
+
+// })
 
 export default PostItem;
-  //  profiles.map(el => console.log());
-      // to={`/profile/${el.user.handle}`}
-      // to={`/profile/${profiles.handle}`}
+  

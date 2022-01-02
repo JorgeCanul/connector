@@ -31,6 +31,22 @@ export const createPost = (post) => dispatch => {
   }))
   .catch(err => console.log(err));
 }
+///////////////////////////////////////
+/////////////////////////////////////// 
+
+export const getPostsById = () => dispatch => {
+  axios.get('/api/post/posts/:id')
+  .then(res => dispatch({
+    type: GET_POSTS,
+    payload: res.data
+  }))
+  .catch(err => dispatch({
+    type: GET_POSTS,
+    payload: null
+  }));
+};
+///////////////////////////////////////
+///////////////////////////////////////
 
 // Get Post
 export const getPost = id => dispatch => {
