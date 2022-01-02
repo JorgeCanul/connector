@@ -11,7 +11,7 @@ import Profiles from "./components/profiles/Profiles";
 import Profile from './components/profile/Profile';
 import Landing from "./components/layout/landing";
 import Dashboard from "./components/dashboard/Dashboard";
-import Posts from "./components/Posts/Posts";
+import Posts from "./components/Posts/posts";
 import PostItem from "./components/Posts/postItem/PostItem";
 import CreateProfile from "./components/create-profile/CreateProfile";
 import { logoutUser } from "./actions/authActions";
@@ -54,7 +54,7 @@ if(localStorage.jwtToken) {
         <Route exact path="/register"  component={Register}/>
         <Route exact path="/login" component={Login}/>
         <Route exact path="/profiles" component={Profiles} />
-        <Route exact path="/profile/"component={Profile}  />
+        <Route exact path="/profile/:handle"component={Profile}  />
         {/* <Switch>
          <PrivateRoute exact path="/profile/"component={Profile} />
        </Switch> */}

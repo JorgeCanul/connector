@@ -9,6 +9,7 @@ const User = require("../models/User");
 const validateProfileInput = require("../validation/profile");
 const validateExperienceInput = require("../validation/experience");
 const validateEducationInput = require("../validation/education");
+const { session } = require('passport');
 
 // @route   POST api/profile
 // @desc    Create or edit user profile
@@ -76,10 +77,9 @@ router.post("/",
 // @access  Private
 router.get(
   "/",
- 
+  passport.authenticate('jwt', {session: false}),
   (req, res) => {
     const errors = {};
-
     Profile.findOne({ user: req.user.id })
       .populate("user", ["name", "avatar"])
       .then((profile) => {

@@ -4,22 +4,17 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ProfileHeader from './ProfileHeader';
 import ProfileAbout from './ProfileAbout';
-import ProfileCreds from './ProfileCreds';
-import ProfileGithub from './ProfileGithub';
 import Form from '../Form/form';
 import Spinner from '../common/Spinner';
-import {  getCurrentProfile } from '../../actions/profileActions';
-
-
-
+import {  getCurrentProfile, getProfileByHandle } from '../../actions/profileActions';
 class Profile extends Component {
   componentDidMount() {
-    // if (this.props.match.params.handle) {
-    //   this.props.getProfileByHandle(this.props.match.params.handle);
-    // }
-    if(this.props.auth.isAuthenticated) {
-      this.props.getCurrentProfile();
+    if (this.props.match.params.handle) {
+      this.props.getProfileByHandle(this.props.match.params.handle);
     }
+    // if(this.props.auth.isAuthenticated) {
+    //   this.props.getCurrentProfile();
+    // }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -30,12 +25,17 @@ class Profile extends Component {
 
   render() {
     const { profile, loading } = this.props.profile;
+    const { auth } = this.props
+    if(auth !== undefined) {
+      console.log(auth.user.id)
+    }
 
-    const { isAuthenticated } = this.props.auth
-    console.log(isAuthenticated)
+    if(profile !== null) {
+      console.log(profile.user._id)
+    }
 
     let profileContent;
-    let form = isAuthenticated ? <Form /> : null;
+
     if (profile === null || loading) {
       profileContent = <Spinner />;
     } else {
@@ -51,13 +51,7 @@ class Profile extends Component {
           </div>
           <ProfileHeader profile={profile} />
           <ProfileAbout profile={profile} />
-          <ProfileCreds
-            education={profile.education}
-            experience={profile.experience}
-          />
-          {profile.githubusername ? (
-            <ProfileGithub username={profile.githubusername} />
-          ) : null}
+          {auth.user.id === profile.user._id? <Form /> : null}
         </div>
       );
     }
@@ -67,7 +61,6 @@ class Profile extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">{profileContent}</div>
-            {form}
           </div>
         </div>
       </div>
@@ -77,7 +70,7 @@ class Profile extends Component {
 
 Profile.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
-  // getProfileByHandle: PropTypes.func.isRequired,
+  getProfileByHandle: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 };
@@ -87,4 +80,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { getCurrentProfile })(Profile);
+export default connect(mapStateToProps, { getCurrentProfile, getProfileByHandle })(Profile);
