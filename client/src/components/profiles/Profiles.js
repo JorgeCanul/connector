@@ -12,14 +12,19 @@ import { getProfiles } from '../../actions/profileActions';
 
   render() {
     const { profiles, loading } = this.props.profile;
-
+    // if(profiles === null || loading ){
+    //   console.log('Working on it');
+    // } else {
+    //   /// 
+    //   profiles.map(el => console.log(el));
+    // }
     let profileItems;
 
     if(profiles === null || loading ) {
       profileItems = <Spinner />
     } else if(profiles.length > 0) {
       profileItems = profiles.map(profile => (
-        <ProfileItem key={profile._id} profile={profile}/>
+        <ProfileItem  key={profile._id} profile={profile}/>
       ));
      } else {
        profileItems = <h4>No Profiles Found...</h4>

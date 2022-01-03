@@ -46,7 +46,7 @@ router.get('/posts', (req, res) => {
 router.get("/posts/:id", (req, res) => {
   const errors = {};
   passport.authenticate('jwt', {session: false}),
-  PostMessage.find({ user: req.params.id})
+  PostMessage.find({ post: req.params.id})
     .sort({date: -1})
     .populate("user", ["name", "avatar"])
     .then((posts) => {
@@ -55,6 +55,7 @@ router.get("/posts/:id", (req, res) => {
         return res.status(404).json(errors);
       } 
         return res.status(200).json(posts)
+
     })
     .catch((err) =>
       res.status(404).json({ profile: "There is no profile for this user" })

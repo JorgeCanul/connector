@@ -33,9 +33,10 @@ export const createPost = (post) => dispatch => {
 }
 ///////////////////////////////////////
 /////////////////////////////////////// 
-
-export const getPostsById = () => dispatch => {
-  axios.get('/api/post/posts/:id')
+// "/posts/:id"
+export const getPostsById = id => dispatch => {
+  axios.get(`/api/post/posts/${id}`)
+  // console.log(id)
   .then(res => dispatch({
     type: GET_POSTS,
     payload: res.data

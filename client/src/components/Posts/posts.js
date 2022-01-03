@@ -27,7 +27,7 @@ class Posts extends Component {
       postContent = <Spinner />;
     } else {
       console.log(posts)
-        postContent = <PostItem id={profiles}  profiles={profiles} posts={posts} />
+        postContent = <PostItem key={posts._id}  profiles={profiles} posts={posts} />
     }
 
     return (

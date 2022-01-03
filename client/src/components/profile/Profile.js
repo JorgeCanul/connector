@@ -14,7 +14,7 @@ class Profile extends Component {
     if (this.props.match.params.handle) {
       this.props.getProfileByHandle(this.props.match.params.handle);
     }
-    if(this.props.match.params.id) {
+    if(this.props.match.params.id !== null) {
       this.props.getPostsById(this.props.match.params.id);
     }
     
@@ -44,7 +44,7 @@ class Profile extends Component {
       // console.log(profile.user._id)
       
       if(profile.user._id) {
-        indiviPosts = profile.user._id
+        indiviPosts =  <PostItem key={profile.user._id} posts={posts}/>
       }
     }
 
@@ -66,7 +66,7 @@ class Profile extends Component {
           <ProfileHeader profile={profile} />
           <ProfileAbout profile={profile} />
           {auth.user.id === profile.user._id? <Form /> : null}
-          <PostItem posts={posts}/>
+          {/* <PostItem posts={posts}/> */}
           {indiviPosts}
         </div>
       );

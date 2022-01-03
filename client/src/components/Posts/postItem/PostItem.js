@@ -17,8 +17,10 @@ class PostItem extends Component {
     // const { id } = this.props
     // console.log(id)
     const { posts, loading } = this.props;
-    // const { profiles } = this.props
+    const { profile } = this.props;
+    // console.log(profile)
     // console.log(profiles)
+    console.log(posts)
     let post;
     const classes = {
       media: {
@@ -69,18 +71,25 @@ class PostItem extends Component {
       display: 'flex',
       justifyContent: 'space-between',
     }}
+    let n;
     
-    if(posts === null || !Object.keys(posts) || loading) {
+    if(posts === null || !Object.entries(posts) || loading || posts.length < 0) {
       post = <Spinner />
     } else {
-    console.log(posts)
+      // if(posts === null || loading || !Object.keys(posts)) {
+
+      //   console.log('Working on it!');
+      // } else {
+      //   posts.map(el1 => console.log(el1.user.name))
+
+      // }
       post = posts.map((el, index) => 
+      // <Link to={`/profile/${profile.handle}`}>
       <Card key={el._id} style={classes.card}>
-        {/* {console.log(el._id)} */}
         <CardMedia style={classes.media} image={el.selectedFile} title={el.title}/>
         <div style={classes.overlay}>
           {/* ///////////////// check? to={`/posts/${el._id}`}*/}
-          <Typography variant="h6">{el.user.name}</Typography>
+          <Typography variant="h6">{el.creator}</Typography>
           <Typography variant="body2">{moment(el.createdAt).format()}</Typography>
         </div>
         <div style={classes.overlay2}>
@@ -107,6 +116,7 @@ class PostItem extends Component {
           </Button>
         </CardActions>
       </Card>
+      // </Link>
       );
   }
   
