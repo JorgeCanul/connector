@@ -14,11 +14,12 @@ class Profile extends Component {
     if (this.props.match.params.handle) {
       this.props.getProfileByHandle(this.props.match.params.handle);
     }
-    if(this.props.match.params.id !== null) {
-      this.props.getPostsById(this.props.match.params.id);
-    }
-    
+
+    // if(this.props.match.params.id) {
+    //   this.props.getPostsById(this.props.match.params.id);
+    // }
   }
+  
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.profile.profile === null && this.props.profile.loading) {
@@ -29,13 +30,9 @@ class Profile extends Component {
   render() {
     const { profile, loading } = this.props.profile;
     const { auth } = this.props;
-    const { posts } = this.props.posts;
-    // console.log(post)
-    // if(posts.length < 0 || loading) {
-    //   console.log('Working on it')
-    // } else {
-    //   console.log(posts);
-    // }
+    const { posts } = this.props;
+    console.log(posts.posts);
+   
     let indiviPosts;
 
     if(profile !== null) {
@@ -43,9 +40,9 @@ class Profile extends Component {
       /////// THIS IS WHAT I NEED!!!! ???? TO SHOW INDIVIDUALS POSTS.
       // console.log(profile.user._id)
       
-      if(profile.user._id) {
-        indiviPosts =  <PostItem key={profile.user._id} posts={posts}/>
-      }
+      // if(profile.user._id) {
+        indiviPosts = posts.posts.map(posts => <PostItem posts={posts}/>)  
+
     }
 
     let profileContent;
@@ -66,7 +63,7 @@ class Profile extends Component {
           <ProfileHeader profile={profile} />
           <ProfileAbout profile={profile} />
           {auth.user.id === profile.user._id? <Form /> : null}
-          {/* <PostItem posts={posts}/> */}
+
           {indiviPosts}
         </div>
       );

@@ -15,19 +15,20 @@ class Posts extends Component {
   componentDidMount() {
     this.props.getPosts();
     this.props.getProfiles();
+
   }
 
   render() {
     const { posts, loading } = this.props.posts;
-    const { profiles } = this.props.profile;
-
-    
+    const { profiles } = this.props.profiles;
+    // console.log(posts);
+    // console.log(profiles)
     let postContent;
     if (posts.length <= 0 || loading || !Object.entries(posts)) {
       postContent = <Spinner />;
     } else {
-      console.log(posts)
-        postContent = <PostItem key={posts._id}  profiles={profiles} posts={posts} />
+
+        postContent = posts.map(posts => <PostItem key={posts._id} profiles={profiles.map(profiles => profiles)}  posts={posts} />)  
     }
 
     return (
@@ -52,13 +53,13 @@ Posts.propTypes = {
   getPosts: PropTypes.func.isRequired,
   posts: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
+  profiles: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   posts: state.posts,
   auth: state.auth,
-  profile: state.profile
+  profiles: state.profile
 });
 
-export default connect(mapStateToProps, { getPosts,  getProfiles})(Posts);
+export default connect(mapStateToProps, { getPosts, getProfiles })(Posts);
