@@ -12,12 +12,7 @@ import { getProfiles } from '../../actions/profileActions';
 
   render() {
     const { profiles, loading } = this.props.profile;
-    // if(profiles === null || loading ){
-    //   console.log('Working on it');
-    // } else {
-    //   /// 
-    //   profiles.map(el => console.log(el));
-    // }
+    
     let profileItems;
 
     if(profiles === null || loading ) {

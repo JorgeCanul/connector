@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import ProfileHeader from './ProfileHeader';
 import ProfileAbout from './ProfileAbout';
 import Form from '../Form/form';
-import PostItem from '../Posts/postItem/PostItem';
+import IndivPosts from '../Posts/postItem/IndivPosts';
 import Spinner from '../common/Spinner';
 import {  getCurrentProfile, getProfileByHandle } from '../../actions/profileActions';
 import { getPostsById } from '../../actions/postsActions';
@@ -14,12 +14,7 @@ class Profile extends Component {
     if (this.props.match.params.handle) {
       this.props.getProfileByHandle(this.props.match.params.handle);
     }
-
-    // if(this.props.match.params.id) {
-    //   this.props.getPostsById(this.props.match.params.id);
-    // }
   }
-  
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.profile.profile === null && this.props.profile.loading) {
@@ -31,19 +26,9 @@ class Profile extends Component {
     const { profile, loading } = this.props.profile;
     const { auth } = this.props;
     const { posts } = this.props;
-    console.log(posts.posts);
-   
-    let indiviPosts;
-
-    if(profile !== null) {
-
-      /////// THIS IS WHAT I NEED!!!! ???? TO SHOW INDIVIDUALS POSTS.
-      // console.log(profile.user._id)
-      
-      // if(profile.user._id) {
-        indiviPosts = posts.posts.map(posts => <PostItem posts={posts}/>)  
-
-    }
+    
+    // console.log(posts.posts);
+    // console.log(profile);
 
     let profileContent;
 
@@ -63,8 +48,7 @@ class Profile extends Component {
           <ProfileHeader profile={profile} />
           <ProfileAbout profile={profile} />
           {auth.user.id === profile.user._id? <Form /> : null}
-
-          {indiviPosts}
+          <IndivPosts loading={loading} profile={profile}/>
         </div>
       );
     }

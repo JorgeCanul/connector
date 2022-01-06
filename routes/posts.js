@@ -43,21 +43,25 @@ router.get('/posts', (req, res) => {
 //@router /api/posts/posts
 //@desc. get all posts by individual
 //@access Public
-router.get("/posts/:id", (req, res) => {
+router.get("/posts/:id", 
+ (req, res) => {
   const errors = {};
   PostMessage.find({ user: req.params.id})
     .sort({date: -1})
-    .populate("user", ["name", "avatar"])
+    .populate("user", ["name", "avatar", "email"])
     .then((posts) => {
-      if (!posts) {
+      if (!posts || posts.length <= 0) {
         errors.noposts = "There is no Posts for this user";
         return res.status(404).json(errors);
+        // console.log('No posts')
       } 
         return res.status(200).json(posts)
+        // console.log(posts)
+
 
     })
     .catch((err) =>
-      res.status(404).json({ profile: "There is no profile for this user" })
+      res.status(404).json({ posts: "There is no posts for this user" })
     );
 });
 

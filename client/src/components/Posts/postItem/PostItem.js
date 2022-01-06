@@ -18,7 +18,7 @@ class PostItem extends Component {
     const { profiles } = this.props;
     // const [...handle] = profiles.map(el => el.handle);
     // console.log(handle)
-    console.log(posts)
+    // console.log(posts)
     let post;
     const classes = {
       media: {
