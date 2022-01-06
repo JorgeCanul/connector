@@ -134,7 +134,7 @@ router.get("/user/:user_id", (req, res) => {
 // @route   GET api/profile/handle/:handle
 // @desc    Get profile by handle
 // @access  Public
-router.get("/handle/:handle", passport.authenticate('jwt', {session: false}), (req, res) => {
+router.get("/handle/:handle", (req, res) => {
   const errors = {};
   Profile.findOne({ handle: req.params.handle })
     .populate("user", ["name", "avatar"])
@@ -147,7 +147,6 @@ router.get("/handle/:handle", passport.authenticate('jwt', {session: false}), (r
     })
     .catch((err) => res.status(404).json(err));
 });
-
 
 // @route   POST api/profile/experience
 // @desc    Add experience to profile

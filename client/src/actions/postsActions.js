@@ -24,6 +24,7 @@ export const getPosts = () => dispatch => {
 
 // Create post, Private
 export const createPost = (post) => dispatch => {
+  
   axios.post('/api/post/posts', post)
   .then(res => dispatch({
     type: CREATE_POST,
@@ -33,9 +34,10 @@ export const createPost = (post) => dispatch => {
 }
 ///////////////////////////////////////
 /////////////////////////////////////// 
-
-export const getPostsById = () => dispatch => {
-  axios.get('/api/post/posts/:id')
+// "/posts/:id"
+export const getPostsById = id => dispatch => {
+  dispatch(setPostLoading());
+  axios.get(`/api/post/posts/${id}`)
   .then(res => dispatch({
     type: GET_POSTS,
     payload: res.data
