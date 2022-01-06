@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_POST, FETCH_ALL, GET_ERRORS, GET_POSTS, POST_LOADING, GET_POST } from './types';
+import { CREATE_POST, FETCH_ALL, GET_ERRORS, GET_POSTS, POST_LOADING, GET_POST, NO_POSTS } from './types';
 
 
 /// get all posts, Public
@@ -43,7 +43,7 @@ export const getPostsById = id => dispatch => {
     payload: res.data
   }))
   .catch(err => dispatch({
-    type: GET_POSTS,
+    type: NO_POSTS,
     payload: null
   }));
 };

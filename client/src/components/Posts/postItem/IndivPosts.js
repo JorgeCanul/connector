@@ -16,31 +16,51 @@ class IndivPosts extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: undefined,
-      loading: this.props
+      loading: this.props,
+      errors: {}
     }
   }
   componentDidMount() {
     if(this.props.profile === undefined || this.state.loading === true) {
         console.log('Working on it!')
     } 
-    
-        if(this.props.profile.user._id || !this.state.loading) {
-            this.props.getPostsById(this.props.profile.user._id);
-            console.log('Done');
+
+    if(this.props.profile.user._id || !this.state.loading) {
+        this.props.getPostsById(this.props.profile.user._id);
+        console.log('Done');
     }
   
   }
 
+  componentWillReceiveProps(nextProps) {
+    // if(nextProps.auth.isAuthenticated) {
+    //   this.props.history.push('/dashboard');
+    // } 
+
+    if(nextProps.errors) {
+      this.setState({errors: nextProps.errors});
+    }
+  }
+
    render() {
-     const { posts, loading } = this.props.posts
+     let { posts, loading } = this.props.posts
+     const { errors } = this.props;
+    //  console.log(typeof posts)
+    //  if(!Object.entries(posts)) {
+    //    console.log(errors);
+    //  }
+
      let individualsPosts;
-     if(posts === undefined || loading) {
+     if(posts === undefined || loading === true) {
       individualsPosts = <Spinner />
      } else {
-      console.log(posts)
-      individualsPosts = posts.map(posts => <PostItem posts={posts}/>)
+        console.log(posts)
+        individualsPosts = posts.map(posts => <PostItem key={posts._id}  posts={posts}/>)
      }
+     if(posts.length === 0) {
+       individualsPosts = <h1>No posts</h1>
+     } 
+     
 
      return (
        <div>{individualsPosts}</div>
@@ -50,11 +70,13 @@ class IndivPosts extends Component {
 
 IndivPosts.propTypes = {
   getPostsById: PropTypes.func.isRequired,
-  posts: PropTypes.object.isRequired
+  posts: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   posts: state.posts,
+  errors: state.errors
 });
 
       
