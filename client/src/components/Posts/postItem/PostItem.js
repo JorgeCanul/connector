@@ -15,7 +15,10 @@ class PostItem extends Component {
   render() {
     
     const { posts, loading } = this.props;
-    const { profiles } = this.props;
+    const { profile } = this.props.profile;
+    const { auth } = this.props;
+    console.log(auth);
+    console.log(profile);
     // const [...handle] = profiles.map(el => el.handle);
     // console.log(handle)
     // console.log(posts)
@@ -74,8 +77,7 @@ class PostItem extends Component {
       post = <Spinner />
     } else {
       post =
-      // post = posts.map((el, index) => 
-      // <Link to={`/profile/${handle}`}>
+      
       <Card key={posts._id} style={classes.card}>
         <CardMedia style={classes.media} image={posts.selectedFile} title={posts.title}/>
         <div style={classes.overlay}>
@@ -101,10 +103,10 @@ class PostItem extends Component {
             <ThumbUpAltIcon fontSize="small"/>
             Like {posts.likeCount}
           </Button>
-          <Button size="small" color="primary" onClick={() => {}}>
+          {auth.user.id === profile.user._id? <Button size="small" color="primary" onClick={() => {}}>
             <DeleteIcon fontSize="small"/>
             Delete
-          </Button>
+          </Button> : null}
         </CardActions>
       </Card>
       //  </Link>
@@ -117,7 +119,15 @@ class PostItem extends Component {
  
   }
 };
+PostItem.propTypes = {
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+}
 
+const mapToStateProps = state => ({
+  auth: state.auth,
+  profile: state.profile
+});
 
-export default PostItem;
+export default connect(mapToStateProps, {})(PostItem);
   

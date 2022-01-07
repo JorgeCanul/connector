@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require("passport");
-// Load Profile Model
+// Load Profile Modelconso
 const Profile = require("../models/Profile");
 // Load User Model
 const User = require("../models/User");
@@ -9,7 +9,6 @@ const User = require("../models/User");
 const validateProfileInput = require("../validation/profile");
 const validateExperienceInput = require("../validation/experience");
 const validateEducationInput = require("../validation/education");
-const { session } = require('passport');
 
 // @route   POST api/profile
 // @desc    Create or edit user profile
