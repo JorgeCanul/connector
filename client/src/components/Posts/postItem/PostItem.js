@@ -8,16 +8,30 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
 import Spinner from '../../common/Spinner';
-import ProfileItem from '../../profiles/ProfileItem';
-
+import { deletePost } from '../../../actions/postsActions';
 
 class PostItem extends Component {
+  constructor() {
+    super();
+
+  }
+
+  onClickDelete(id) {
+    // e.preventDefault();
+    console.log('I got clicked');
+    this.props.deletePost(id);
+  }
 
   render() {
-    const { posts } = this.props;
-    const { profiles } = this.props
-    // console.log(profiles)
-    // console.log(posts)
+    
+    const { posts, loading } = this.props;
+    const { profile } = this.props.profile;
+    const { auth } = this.props;
+    console.log(auth);
+    console.log(profile);
+    // const [...handle] = profiles.map(el => el.handle);
+    // console.log(handle)
+    console.log(posts)
     let post;
     const classes = {
       media: {
@@ -69,19 +83,17 @@ class PostItem extends Component {
       justifyContent: 'space-between',
     }}
     
-    if(posts === null || !Object.keys(posts)) {
+    if(posts === null || !Object.entries(posts) || loading || posts.length < 0) {
       post = <Spinner />
     } else {
-      // posts.map(el => console.log(el.user.name))
-     
-    
-      post = posts.map((el, index) => 
-      <Card key={el._id} style={classes.card}>
-        <CardMedia style={classes.media} image={el.selectedFile} title={el.title}/>
+      post =
+      
+      <Card key={posts._id} style={classes.card}>
+        <CardMedia style={classes.media} image={posts.selectedFile} title={posts.title}/>
         <div style={classes.overlay}>
           {/* ///////////////// check? to={`/posts/${el._id}`}*/}
-          <Typography variant="h6"><Link to={`/posts/${el._id}`}>{el.createdAt}</Link></Typography>
-          <Typography variant="body2">{moment(el.createdAt).format()}</Typography>
+          <Typography variant="h6">{posts.creator}</Typography>
+          <Typography variant="body2">{moment(posts.createdAt).format()}</Typography>
         </div>
         <div style={classes.overlay2}>
           <Button style={{color: 'white'}} size="small" onClick={() => {}}>
@@ -90,24 +102,25 @@ class PostItem extends Component {
         </div>
         <div style={classes.details}>
         <Typography variant="body2" color="textSecondary">
-          {`#${el.tags.map(tag => tag)}`}
+          {`#${posts.tags.map(tag => tag)}`}
         </Typography>
         </div>
         <CardContent>
-           <Typography style={classes.title} variant="h5" color="textSecondary" gutterBottom>{el.message}</Typography>
+           <Typography style={classes.title} variant="h5" color="textSecondary" gutterBottom>{posts.message}</Typography>
         </CardContent>
         <CardActions style={classes.cardActions}>
           <Button size="small" color="primary" onClick={() => {}}>
             <ThumbUpAltIcon fontSize="small"/>
-            Like {el.likeCount}
+            Like {posts.likeCount}
           </Button>
-          <Button size="small" color="primary" onClick={() => {}}>
+          {auth.user.id === profile.user._id? <Button  size="small" color="primary" onClick={() => this.onClickDelete(posts._id)}>
             <DeleteIcon fontSize="small"/>
             Delete
-          </Button>
+          </Button> : null}
         </CardActions>
       </Card>
-      );
+      //  </Link>
+      // );
   }
   
   return (
@@ -117,13 +130,15 @@ class PostItem extends Component {
   }
 };
 PostItem.propTypes = {
-  posts: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
-};
+  deletePost: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+}
 
-// const mapStateToProps = (state) => ({
+const mapToStateProps = state => ({
+  auth: state.auth,
+  profile: state.profile
+});
 
-// })
-
-export default PostItem;
+export default connect(mapToStateProps, {deletePost})(PostItem);
   

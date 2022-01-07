@@ -5,16 +5,15 @@ import { Link } from 'react-router-dom';
 import ProfileHeader from './ProfileHeader';
 import ProfileAbout from './ProfileAbout';
 import Form from '../Form/form';
+import IndivPosts from '../Posts/postItem/IndivPosts';
 import Spinner from '../common/Spinner';
 import {  getCurrentProfile, getProfileByHandle } from '../../actions/profileActions';
+
 class Profile extends Component {
   componentDidMount() {
     if (this.props.match.params.handle) {
       this.props.getProfileByHandle(this.props.match.params.handle);
     }
-    // if(this.props.auth.isAuthenticated) {
-    //   this.props.getCurrentProfile();
-    // }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -25,15 +24,8 @@ class Profile extends Component {
 
   render() {
     const { profile, loading } = this.props.profile;
-    const { auth } = this.props
-    if(auth !== undefined) {
-      console.log(auth.user.id)
-    }
-
-    if(profile !== null) {
-      console.log(profile.user._id)
-    }
-
+    const { auth } = this.props;
+    console.log(profile);
     let profileContent;
 
     if (profile === null || loading) {
@@ -52,6 +44,7 @@ class Profile extends Component {
           <ProfileHeader profile={profile} />
           <ProfileAbout profile={profile} />
           {auth.user.id === profile.user._id? <Form /> : null}
+          <IndivPosts loading={loading} profile={profile}/>
         </div>
       );
     }
@@ -72,12 +65,12 @@ Profile.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
   getProfileByHandle: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
   profile: state.profile,
-  auth: state.auth
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, { getCurrentProfile, getProfileByHandle })(Profile);

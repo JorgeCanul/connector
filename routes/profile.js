@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require("passport");
-// Load Profile Model
+// Load Profile Modelconso
 const Profile = require("../models/Profile");
 // Load User Model
 const User = require("../models/User");
@@ -9,7 +9,6 @@ const User = require("../models/User");
 const validateProfileInput = require("../validation/profile");
 const validateExperienceInput = require("../validation/experience");
 const validateEducationInput = require("../validation/education");
-const { session } = require('passport');
 
 // @route   POST api/profile
 // @desc    Create or edit user profile
@@ -134,7 +133,7 @@ router.get("/user/:user_id", (req, res) => {
 // @route   GET api/profile/handle/:handle
 // @desc    Get profile by handle
 // @access  Public
-router.get("/handle/:handle", passport.authenticate('jwt', {session: false}), (req, res) => {
+router.get("/handle/:handle", (req, res) => {
   const errors = {};
   Profile.findOne({ handle: req.params.handle })
     .populate("user", ["name", "avatar"])
@@ -147,7 +146,6 @@ router.get("/handle/:handle", passport.authenticate('jwt', {session: false}), (r
     })
     .catch((err) => res.status(404).json(err));
 });
-
 
 // @route   POST api/profile/experience
 // @desc    Add experience to profile
