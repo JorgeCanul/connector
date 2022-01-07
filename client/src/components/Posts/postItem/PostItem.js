@@ -8,9 +8,19 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
 import Spinner from '../../common/Spinner';
-import ProfileItem from '../../profiles/ProfileItem';
+import { deletePost } from '../../../actions/postsActions';
 
 class PostItem extends Component {
+  constructor() {
+    super();
+
+  }
+
+  onClickDelete(id) {
+    // e.preventDefault();
+    console.log('I got clicked');
+    this.props.deletePost(id);
+  }
 
   render() {
     
@@ -21,7 +31,7 @@ class PostItem extends Component {
     console.log(profile);
     // const [...handle] = profiles.map(el => el.handle);
     // console.log(handle)
-    // console.log(posts)
+    console.log(posts)
     let post;
     const classes = {
       media: {
@@ -103,7 +113,7 @@ class PostItem extends Component {
             <ThumbUpAltIcon fontSize="small"/>
             Like {posts.likeCount}
           </Button>
-          {auth.user.id === profile.user._id? <Button size="small" color="primary" onClick={() => {}}>
+          {auth.user.id === profile.user._id? <Button  size="small" color="primary" onClick={() => this.onClickDelete(posts._id)}>
             <DeleteIcon fontSize="small"/>
             Delete
           </Button> : null}
@@ -120,6 +130,7 @@ class PostItem extends Component {
   }
 };
 PostItem.propTypes = {
+  deletePost: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
 }
@@ -129,5 +140,5 @@ const mapToStateProps = state => ({
   profile: state.profile
 });
 
-export default connect(mapToStateProps, {})(PostItem);
+export default connect(mapToStateProps, {deletePost})(PostItem);
   

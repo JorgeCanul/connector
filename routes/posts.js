@@ -97,6 +97,7 @@ router.delete(
           }
           // Delete
           post.remove().then(() => res.json({ success: true }));
+          console.log('Deleted')
         })
         .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
     });

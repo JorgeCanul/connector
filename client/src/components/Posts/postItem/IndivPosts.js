@@ -20,6 +20,18 @@ class IndivPosts extends Component {
       errors: {}
     }
   }
+
+  componentWillReceiveProps(nextProps) {
+    // if(nextProps.auth.isAuthenticated) {
+    //   this.props.history.push('/dashboard');
+    // } 
+
+    if(nextProps.errors) {
+      this.setState({errors: nextProps.errors});
+    }
+  }
+
+
   componentDidMount() {
     if(this.props.profile === undefined || this.state.loading === true) {
         console.log('Working on it!')
@@ -32,16 +44,7 @@ class IndivPosts extends Component {
   
   }
 
-  componentWillReceiveProps(nextProps) {
-    // if(nextProps.auth.isAuthenticated) {
-    //   this.props.history.push('/dashboard');
-    // } 
-
-    if(nextProps.errors) {
-      this.setState({errors: nextProps.errors});
-    }
-  }
-
+  
    render() {
      let { posts, loading } = this.props.posts
      const { errors } = this.props;
@@ -49,6 +52,7 @@ class IndivPosts extends Component {
     //  if(!Object.entries(posts)) {
     //    console.log(errors);
     //  }
+    console.log(errors.noposts);
 
      let individualsPosts;
      if(posts === undefined || loading === true) {
@@ -60,7 +64,6 @@ class IndivPosts extends Component {
      if(posts.length === 0) {
        individualsPosts = <h1>No posts</h1>
      } 
-     
 
      return (
        <div>{individualsPosts}</div>

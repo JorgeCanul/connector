@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_POST, FETCH_ALL, GET_ERRORS, GET_POSTS, POST_LOADING, GET_POST, NO_POSTS } from './types';
+import { CREATE_POST, FETCH_ALL, GET_ERRORS, GET_POSTS, POST_LOADING, GET_POST, NO_POSTS, DELETE_POST } from './types';
 
 
 /// get all posts, Public
@@ -43,12 +43,10 @@ export const getPostsById = id => dispatch => {
     payload: res.data
   }))
   .catch(err => dispatch({
-    type: NO_POSTS,
-    payload: null
+    type: GET_ERRORS,
+    payload: err.response.data
   }));
 };
-///////////////////////////////////////
-///////////////////////////////////////
 
 // Get Post
 export const getPost = id => dispatch => {
@@ -69,6 +67,17 @@ export const getPost = id => dispatch => {
     );
 };
 
+export const deletePost = id => dispatch => {
+  axios.delete(`/api/post/post/${id}`)
+  .then(res => dispatch({
+    type: DELETE_POST,
+    payload: res.data
+  }))
+  .catch(err => dispatch({
+    type: GET_ERRORS,
+    payload: err.response.data
+  }))
+}
 
 
 // Set loading state

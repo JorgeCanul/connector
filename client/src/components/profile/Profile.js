@@ -8,7 +8,7 @@ import Form from '../Form/form';
 import IndivPosts from '../Posts/postItem/IndivPosts';
 import Spinner from '../common/Spinner';
 import {  getCurrentProfile, getProfileByHandle } from '../../actions/profileActions';
-import { getPostsById } from '../../actions/postsActions';
+
 class Profile extends Component {
   componentDidMount() {
     if (this.props.match.params.handle) {
@@ -25,11 +25,7 @@ class Profile extends Component {
   render() {
     const { profile, loading } = this.props.profile;
     const { auth } = this.props;
-    const { posts } = this.props;
-    
-    // console.log(posts.posts);
-    // console.log(profile);
-
+    console.log(profile);
     let profileContent;
 
     if (profile === null || loading) {
@@ -68,16 +64,13 @@ class Profile extends Component {
 Profile.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
   getProfileByHandle: PropTypes.func.isRequired,
-  getPostsById: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  posts: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   profile: state.profile,
   auth: state.auth,
-  posts: state.posts
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, getProfileByHandle, getPostsById })(Profile);
+export default connect(mapStateToProps, { getCurrentProfile, getProfileByHandle })(Profile);
