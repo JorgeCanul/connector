@@ -52,8 +52,8 @@ router.get("/posts/:id",
     .then((posts) => {
       if (!posts || posts.length <= 0) {
         errors.noposts = "There is no Posts for this user";
-        return res.status(404).json(errors);
-        // console.log('No posts')
+        // return res.status(404).json(errors);
+        console.log('No posts')
       } 
         return res.status(200).json(posts)
         // console.log(posts)

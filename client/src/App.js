@@ -56,6 +56,7 @@ if(localStorage.jwtToken) {
         <Route exact path="/login" component={Login}/>
         <Route exact path="/profiles" component={Profiles} />
         <Route exact path="/profile/:handle"component={Profile}  />
+        <Route exact exact path="/feed" component={Posts}  />
         {/* <Switch>
          <PrivateRoute exact path="/profile/"component={Profile} />
        </Switch> */}
@@ -68,9 +69,9 @@ if(localStorage.jwtToken) {
         component={CreateProfile}
         />
       </Switch>
-      <Switch>
+      {/* <Switch>
         <PrivateRoute exact path="/feed" component={Posts} />
-      </Switch>
+      </Switch> */}
           {/* <Switch>
               <PrivateRoute exact path="/posts/:id" component={Post} />
           </Switch> */}
