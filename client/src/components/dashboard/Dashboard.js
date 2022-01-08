@@ -9,6 +9,7 @@ import Experience from './Experience';
 import Education from './Education';
 
 
+
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getCurrentProfile();

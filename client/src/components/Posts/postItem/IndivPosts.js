@@ -55,15 +55,18 @@ class IndivPosts extends Component {
     console.log(errors.noposts);
 
      let individualsPosts;
-     if(posts === undefined || loading === true) {
+     if(posts === null || loading) {
       individualsPosts = <Spinner />
      } else {
+       if(Object.keys(posts).length > 0) {
         console.log(posts)
         individualsPosts = posts.map(posts => <PostItem key={posts._id}  posts={posts}/>)
+       }
+       else if (errors){
+        individualsPosts = <h1>No posts</h1>
+      }
      }
-     if(posts.length === 0) {
-       individualsPosts = <h1>No posts</h1>
-     } 
+     
 
      return (
        <div>{individualsPosts}</div>
