@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
-import DeleteIcon from '@material-ui/icons/Delete';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import moment from 'moment';
 import Spinner from '../../common/Spinner';
-import { getCurrentProfile } from '../../../actions/profileActions';
 import { getPostsById } from '../../../actions/postsActions';
 import PostItem from './PostItem';
 
@@ -22,9 +16,6 @@ class IndivPosts extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // if(nextProps.auth.isAuthenticated) {
-    //   this.props.history.push('/dashboard');
-    // } 
 
     if(nextProps.errors) {
       this.setState({errors: nextProps.errors});
