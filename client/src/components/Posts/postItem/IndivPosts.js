@@ -1,34 +1,32 @@
 import React, { Component } from 'react';
-import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
-import DeleteIcon from '@material-ui/icons/Delete';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import moment from 'moment';
 import Spinner from '../../common/Spinner';
-import { getCurrentProfile } from '../../../actions/profileActions';
 import { getPostsById } from '../../../actions/postsActions';
-import PostItem from './PostItem';
+import IndividualPostsItem from './IndividualPostItem';
 
 
 class IndivPosts extends Component { 
   constructor(props) {
     super(props);
     this.state = {
-      loading: this.props,
-      errors: {}
+      errors: {},
+      profileId: null
     }
+
   }
 
   componentWillReceiveProps(nextProps) {
-    // if(nextProps.auth.isAuthenticated) {
-    //   this.props.history.push('/dashboard');
-    // } 
 
     if(nextProps.errors) {
       this.setState({errors: nextProps.errors});
     }
+
+    if(nextProps.profile) {
+      this.setState({profileId: nextProps.profile.user._id});
+    }
+    return this.state.profileId
+    
   }
 
 
@@ -37,33 +35,36 @@ class IndivPosts extends Component {
         console.log('Working on it!')
     } 
 
-    if(this.props.profile.user._id || !this.state.loading) {
+    // if(this.props.profile.user._id || !this.state.loading) {
         this.props.getPostsById(this.props.profile.user._id);
         console.log('Done');
-    }
+    // }
   
   }
 
   
    render() {
      let { posts, loading } = this.props.posts
-     const { errors } = this.props;
-    //  console.log(typeof posts)
-    //  if(!Object.entries(posts)) {
-    //    console.log(errors);
-    //  }
-    console.log(errors.noposts);
+     const { errors } = this.state;
 
      let individualsPosts;
-     if(posts === undefined || loading === true) {
+     if(posts === null || loading) {
       individualsPosts = <Spinner />
-     } else {
-        console.log(posts)
-        individualsPosts = posts.map(posts => <PostItem key={posts._id}  posts={posts}/>)
+     } else  {
+      //  if(Object.keys(posts).length > 0) {
+        if(Object.keys(posts).length > 0 || loading === false){
+
+          individualsPosts = posts.map(posts => <IndividualPostsItem key={posts._id}  posts={posts}/>)
+        //  }
+        }
      }
-     if(posts.length === 0) {
-       individualsPosts = <h1>No posts</h1>
-     } 
+      // individualsPosts = <h1>No posts</h1> 
+
+
+     if(errors) {
+       console.log(errors)
+    //   individualsPosts = <h1>{errors.noposts}</h1> 
+     }
 
      return (
        <div>{individualsPosts}</div>

@@ -11,7 +11,7 @@ import Profiles from "./components/profiles/Profiles";
 import Profile from './components/profile/Profile';
 import Landing from "./components/layout/landing";
 import Dashboard from "./components/dashboard/Dashboard";
-import Posts from "./components/Posts/posts";
+import Posts from "./components/Posts/Posts";
 import PostItem from "./components/Posts/postItem/PostItem";
 // import Post from "./components/Posts/postItem/Post";
 import CreateProfile from "./components/create-profile/CreateProfile";
@@ -56,6 +56,7 @@ if(localStorage.jwtToken) {
         <Route exact path="/login" component={Login}/>
         <Route exact path="/profiles" component={Profiles} />
         <Route exact path="/profile/:handle"component={Profile}  />
+        <Route exact exact path="/feed" component={Posts}  />
         {/* <Switch>
          <PrivateRoute exact path="/profile/"component={Profile} />
        </Switch> */}
@@ -68,9 +69,9 @@ if(localStorage.jwtToken) {
         component={CreateProfile}
         />
       </Switch>
-      <Switch>
+      {/* <Switch>
         <PrivateRoute exact path="/feed" component={Posts} />
-      </Switch>
+      </Switch> */}
           {/* <Switch>
               <PrivateRoute exact path="/posts/:id" component={Post} />
           </Switch> */}
