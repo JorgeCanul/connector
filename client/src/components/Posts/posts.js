@@ -24,11 +24,12 @@ class Posts extends Component {
     // console.log(posts);
     // console.log(profiles)
     let postContent;
-    if (posts.length <= 0 || loading || !Object.entries(posts)) {
+    if (posts === null || loading || !Object.entries(posts)) {
       postContent = <Spinner />;
     } else {
-
-        postContent = posts.map(posts => <PostItem key={posts._id} profiles={profiles.map(profiles => profiles)}  posts={posts} />)  
+      console.log(posts);
+      console.log(profiles)
+        postContent = posts.map(posts => <PostItem loading={loading} key={posts._id} profiles={profiles.map(profiles => profiles)}  posts={posts} />)  
     }
 
     return (

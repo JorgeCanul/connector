@@ -9,16 +9,14 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
 import Spinner from '../../common/Spinner';
 import ProfileItem from '../../profiles/ProfileItem';
-
-class PostItem extends Component {
+ class PostItem extends Component {
+  
+  onClick(id) {
+    console.log(id);
+  }
 
   render() {
-    
-    const { posts, loading } = this.props;
-    const { profiles } = this.props;
-    // const [...handle] = profiles.map(el => el.handle);
-    // console.log(handle)
-    // console.log(posts)
+    const { posts, loading, profiles } = this.props;
     let post;
     const classes = {
       media: {
@@ -70,17 +68,16 @@ class PostItem extends Component {
       justifyContent: 'space-between',
     }}
     
-    if(posts === null || !Object.entries(posts) || loading || posts.length < 0) {
+    if(posts === null || loading) {
       post = <Spinner />
     } else {
+      console.log(profiles)
+      console.log(posts)
       post =
-      // post = posts.map((el, index) => 
-      // <Link to={`/profile/${handle}`}>
-      <Card key={posts._id} style={classes.card}>
+      <Card onClick={this.onClick.bind(this, posts.user._id)} className="mt-3" key={posts._id} style={classes.card}>
         <CardMedia style={classes.media} image={posts.selectedFile} title={posts.title}/>
         <div style={classes.overlay}>
-          {/* ///////////////// check? to={`/posts/${el._id}`}*/}
-          <Typography variant="h6">{posts.creator}</Typography>
+          <Typography variant="h6">{posts.user.name}</Typography>
           <Typography variant="body2">{moment(posts.createdAt).format()}</Typography>
         </div>
         <div style={classes.overlay2}>
@@ -101,14 +98,12 @@ class PostItem extends Component {
             <ThumbUpAltIcon fontSize="small"/>
             Like {posts.likeCount}
           </Button>
-          <Button size="small" color="primary" onClick={() => {}}>
+          {/* <Button size="small" color="primary" onClick={() => {}}>
             <DeleteIcon fontSize="small"/>
             Delete
-          </Button>
+          </Button> */}
         </CardActions>
       </Card>
-      //  </Link>
-      // );
   }
   
   return (
