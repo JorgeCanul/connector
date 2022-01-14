@@ -8,48 +8,15 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import moment from 'moment';
 import Spinner from '../../common/Spinner';
-import { deletePost } from '../../../actions/postsActions';
-
-class PostItem extends Component {
-  constructor() {
-    super();
-
-  }
-
-  onClickDelete(id) {
-    // e.preventDefault();
-    console.log('I got clicked');
-    this.props.deletePost(id);
+import ProfileItem from '../../profiles/ProfileItem';
+ class PostItem extends Component {
+  
+  onClick(id) {
+    console.log(id);
   }
 
   render() {
-    
-    const { posts, loading } = this.props;
-    const { profile } = this.props;
-    const { auth } = this.props;
-    // console.log(auth);
-    // console.log(profile);
-    // const [...handle] = profiles.map(el => el.handle);
-    // console.log(handle)
-    // console.log(posts)
-    // let btn = [];
-    // profile.profiles.map((item, index) => {
-    //   if(item.user._id === auth.user.id) {
-    //     btn.push(<Button size="small" color="primary" onClick={() => this.onClickDelete(posts._id)}>
-    //      <DeleteIcon fontSize="small"/>
-    //      Delete
-    //      </Button>)
-    //   }
-    // }
-    // )
-      //  if(profile.profiles.map((item, i) => item.user._id === auth.user.id)) {
-      //    console.log(item[i])
-        // btn = <Button size="small" color="primary" onClick={() => this.onClickDelete(posts._id)}>
-        // <DeleteIcon fontSize="small"/>
-        // Delete
-        // </Button>
-      //  }
-        
+    const { posts, loading, profiles } = this.props;
     let post;
     const classes = {
       media: {
@@ -101,19 +68,16 @@ class PostItem extends Component {
       justifyContent: 'space-between',
     }}
     
-    if(posts === null || !Object.entries(posts) || loading || posts.length < 0) {
+    if(posts === null || loading) {
       post = <Spinner />
     } else {
-      console.log(posts);
-      console.log(profile);
-      console.log(profile.profiles.map(item => item.user._id === auth.user.id))
+      console.log(profiles)
+      console.log(posts)
       post =
-      
-      <Card key={posts._id} style={classes.card}>
+      <Card onClick={this.onClick.bind(this, posts.user._id)} className="mt-3" key={posts._id} style={classes.card}>
         <CardMedia style={classes.media} image={posts.selectedFile} title={posts.title}/>
         <div style={classes.overlay}>
-          {/* ///////////////// check? to={`/posts/${el._id}`}*/}
-          <Typography variant="h6">{posts.creator}</Typography>
+          <Typography variant="h6">{posts.user.name}</Typography>
           <Typography variant="body2">{moment(posts.createdAt).format()}</Typography>
         </div>
         <div style={classes.overlay2}>
@@ -134,15 +98,12 @@ class PostItem extends Component {
             <ThumbUpAltIcon fontSize="small"/>
             Like {posts.likeCount}
           </Button>
-          {/* {profile.profiles.map((item, i) => item.user._id === auth.user.id)?<Button size="small" color="primary" onClick={() => this.onClickDelete(posts._id)}>
+          {/* <Button size="small" color="primary" onClick={() => {}}>
             <DeleteIcon fontSize="small"/>
             Delete
-          </Button> : null} */}
-          {/* {btn.map(item => item)} */}
+          </Button> */}
         </CardActions>
       </Card>
-      //  </Link>
-      // );
   }
   
   return (
@@ -162,5 +123,5 @@ const mapToStateProps = state => ({
   profile: state.profile
 });
 
-export default connect(mapToStateProps, {deletePost})(PostItem);
+export default connect(mapToStateProps, {})(PostItem);
   

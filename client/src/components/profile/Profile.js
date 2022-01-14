@@ -25,7 +25,7 @@ class Profile extends Component {
   render() {
     const { profile, loading } = this.props.profile;
     const { auth } = this.props;
-    console.log(profile);
+    // console.log(profile);
     let profileContent;
 
     if (profile === null || loading) {
@@ -44,7 +44,6 @@ class Profile extends Component {
           <ProfileHeader profile={profile} />
           <ProfileAbout profile={profile} />
           {auth.user.id === profile.user._id? <Form /> : null}
-          <IndivPosts loading={loading} profile={profile}/>
         </div>
       );
     }
