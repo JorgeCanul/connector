@@ -41,13 +41,14 @@ import ProfileItem from '../../profiles/ProfileItem';
     },
     overlay: {
       position: 'absolute',
-      top: '20px',
-      left: '20px',
-      color: 'white',
+      top: '10px',
+      Left: '0.10rem',
+      color: '#98dce5',
+
     },
     overlay2: {
       position: 'absolute',
-      top: '20px',
+      top: '10px',
       right: '20px',
       color: 'white',
     },
@@ -69,16 +70,19 @@ import ProfileItem from '../../profiles/ProfileItem';
     }}
     
     if(posts === null || loading) {
+
       post = <Spinner />
     } else {
-      console.log(profiles)
       console.log(posts)
       post =
       <Card onClick={this.onClick.bind(this, posts.user._id)} className="mt-3" key={posts._id} style={classes.card}>
         <CardMedia style={classes.media} image={posts.selectedFile} title={posts.title}/>
-        <div style={classes.overlay}>
+        <div style={classes.overlay} className='col-xs-3 col-sm-1 col-lg-3'>
+        <img style={ {maxHeight: '50px', maxWidth: '50px', backgroundColor: '#98dce5'}} className="rounded-circle img-thumbnail"
+              src={posts.user.avatar}
+              alt={posts.user.name}/>
           <Typography variant="h6">{posts.user.name}</Typography>
-          <Typography variant="body2">{moment(posts.createdAt).format()}</Typography>
+          <Typography variant="body2">{moment(posts.creatorAt).fromNow()}</Typography>
         </div>
         <div style={classes.overlay2}>
           <Button style={{color: 'white'}} size="small" onClick={() => {}}>
