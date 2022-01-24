@@ -69,7 +69,7 @@ import ProfileItem from '../../profiles/ProfileItem';
       justifyContent: 'space-between',
     }}
     
-    if(posts === null || loading) {
+    if(posts === undefined || loading) {
 
       post = <Spinner />
     } else {

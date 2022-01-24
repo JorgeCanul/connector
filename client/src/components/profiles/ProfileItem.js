@@ -7,16 +7,16 @@ import { Link } from 'react-router-dom';
   render() {
     const { profile } = this.props;
     return (
-      <div className="card card-body bg-light mb-3">
-        <div className='row'>
-          <div className='col-2'>
+      <div  className="card card-body bg-light mb-3">
+        <div className='row '>
+          <div className='col-2 pb-2'>
             <img src={profile.user.avatar} alt={profile.user.name}
-            className='rounded-circle'/>
+            className='rounded-circle ' />
           </div>
-          <div className="col-lg-6 col-md-4 col-8">
+          <div className="col-lg-12 col-md-6 col-sm-6">
             <h3>{profile.user.name}</h3>
-            <Link to={`/profile/${profile.handle}`} className="btn btn-info">
-              View Profile
+            <Link to={`/profile/${profile.handle}`} type='button' className="btn btn-info btn-sm">
+              See Profile
             </Link>
           </div>
         </div>

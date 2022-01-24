@@ -12,16 +12,13 @@ import Profile from './components/profile/Profile';
 import Landing from "./components/layout/landing";
 import Dashboard from "./components/dashboard/Dashboard";
 import Posts from "./components/Posts/posts";
-import PostItem from "./components/Posts/postItem/PostItem";
-// import Post from "./components/Posts/postItem/Post";
+
 import CreateProfile from "./components/create-profile/CreateProfile";
 import { logoutUser } from "./actions/authActions";
 import { SET_USER } from "./actions/types";
 import PrivateRoute from "./components/common/PrivateRoute";
-
 import jwt_decode from 'jwt-decode';
 import setAuthToken from "./utils/setAuthToken";
-import Form from "./components/Form/form";
 
 if(localStorage.jwtToken) {
   //decode 
@@ -57,25 +54,12 @@ if(localStorage.jwtToken) {
         <Route exact path="/profiles" component={Profiles} />
         <Route exact path="/profile/:handle"component={Profile}  />
         <Route exact exact path="/feed" component={Posts}  />
-
-        {/* <Switch>
-         <PrivateRoute exact path="/profile/"component={Profile} />
-       </Switch> */}
         <Switch>
          <PrivateRoute exact path="/dashboard" component={Dashboard} />
        </Switch>
-
        <Switch>
-        <PrivateRoute exact path="/create-profile" 
-        component={CreateProfile}
-        />
+        <PrivateRoute exact path="/create-profile" component={CreateProfile} />
       </Switch>
-      {/* <Switch>
-        <PrivateRoute exact path="/feed" component={Posts} />
-      </Switch> */}
-          {/* <Switch>
-              <PrivateRoute exact path="/posts/:id" component={Post} />
-          </Switch> */}
     </BrowserRouter>
     </Provider>
      )

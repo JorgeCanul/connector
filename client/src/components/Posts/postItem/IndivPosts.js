@@ -9,39 +9,70 @@ import moment from 'moment';
 import Spinner from '../../common/Spinner';
 import { getCurrentProfile } from '../../../actions/profileActions';
 import { getPostsById } from '../../../actions/postsActions';
-import PostItem from './PostItem';
+// import IndivPostsItem from './IndivPostsItem';
 
 
 class IndivPosts extends Component { 
   constructor(props) {
     super(props);
     this.state = {
-      id: undefined,
-      loading: this.props
+      errors: {}
     }
   }
+  // componentDidMount() {
+  //     console.log(this.props);
+  //   // }
+  //     // this.props.getPostsById(this.props.profile.user._id);
+  //     // console.log(this.props.profile.user._id)
+  // }
+
   componentDidMount() {
-    if(this.props.profile === undefined || this.state.loading === true) {
-        console.log('Working on it!')
-    } 
-    
-        if(this.props.profile.user._id || !this.state.loading) {
-            this.props.getPostsById(this.props.profile.user._id);
-            console.log('Done');
+    if(this.props.errors) {
+      this.setState({errors: this.props.errors})
     }
-  
+    
+    let { posts, ...profile} = this.props;
+    console.log(profile)
+    // posts.indiPosts.map(el => console.log(el.user._id))
+    console.log(posts)
+    // if(profile.profile.profile.user._id === )
+    this.props.getPostsById(profile.profile.profile.user._id);
+    // console.log(profile.user._id)
+    // if(this.profile.match)/
+    //   if(Object.entries(posts.indiPosts).length > 0 ) {
+    //     posts.indiPosts.map(el => {
+    //         console.log(el)
+    //         // this.props.getPostsById(el.user.match.params.id);
+    //     })
+    //   }
   }
+ 
+  // componentWillReceiveProps(nextProps) {
+  //   if(nextProps.errors) {
+  //     this.setState({errors: nextProps.errors})
+  //   }
+  // }
 
    render() {
-     const { posts, loading } = this.props.posts
-     let individualsPosts;
-     if(posts === undefined || loading) {
-      individualsPosts = <Spinner />
-     } else {
-      console.log(posts)
-      individualsPosts = posts.map(posts => <PostItem posts={posts}/>)
-     }
+     const {  loading, indiPosts } = this.props.posts
+    const { errors } = this.state;
+    
+    if(errors) {
+      console.log(errors)
+    }
 
+     let individualsPosts;
+     
+     if(indiPosts === undefined || loading) {
+      individualsPosts = <Spinner />
+     } 
+     if(Object.entries(indiPosts).length > 0 || Object.entries(errors).length < 0){
+      
+      // individualsPosts = indiPosts.map(posts => <IndivPostsItem key={posts._id} posts={posts}/>)
+     } else {
+      individualsPosts = <h1>No posts!</h1>
+    }
+    
      return (
        <div>{individualsPosts}</div>
      )
@@ -50,12 +81,17 @@ class IndivPosts extends Component {
 
 IndivPosts.propTypes = {
   getPostsById: PropTypes.func.isRequired,
-  posts: PropTypes.object.isRequired
+  getCurrentProfile: PropTypes.func.isRequired,
+  posts: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   posts: state.posts,
+  errors: state.errors,
+  profile: state.profile
 });
 
       
-export default connect(mapStateToProps, { getPostsById})(IndivPosts)
+export default connect(mapStateToProps, {getCurrentProfile, getPostsById})(IndivPosts)

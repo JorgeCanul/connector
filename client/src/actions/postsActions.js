@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_POST, FETCH_ALL, GET_ERRORS, GET_POSTS, POST_LOADING, GET_POST, NO_POSTS, DELETE_POST } from './types';
+import { CREATE_POST,GET_ERRORS, GET_POSTS, POST_LOADING, GET_POST, NO_POSTS, DELETE_POST, CLEAR_ERRORS, INDIVIDUAL_POSTS } from './types';
 
 
 /// get all posts, Public
@@ -39,7 +39,7 @@ export const getPostsById = id => dispatch => {
   dispatch(setPostLoading());
   axios.get(`/api/post/posts/${id}`)
   .then(res => dispatch({
-    type: GET_POSTS,
+    type: INDIVIDUAL_POSTS,
     payload: res.data
   }))
   .catch(err => dispatch({
@@ -49,23 +49,23 @@ export const getPostsById = id => dispatch => {
 };
 
 // Get Post
-export const getPost = id => dispatch => {
-  dispatch(setPostLoading());
-  axios
-    .get(`/api/post/posts/${id}`)
-    .then(res =>
-      dispatch({
-        type: GET_POSTS,
-        payload: res.data
-      })
-    )
-    .catch(err =>
-      dispatch({
-        type: GET_POSTS,
-        payload: null
-      })
-    );
-};
+// export const getPost = id => dispatch => {
+//   dispatch(setPostLoading());
+//   axios
+//     .get(`/api/post/posts/${id}`)
+//     .then(res =>
+//       dispatch({
+//         type: GET_POSTS,
+//         payload: res.data
+//       })
+//     )
+//     .catch(err =>
+//       dispatch({
+//         type: GET_POSTS,
+//         payload: null
+//       })
+//     );
+// };
 
 export const deletePost = id => dispatch => {
   axios.delete(`/api/post/post/${id}`)

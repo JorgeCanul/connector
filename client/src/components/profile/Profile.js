@@ -14,23 +14,28 @@ class Profile extends Component {
     if (this.props.match.params.handle) {
       this.props.getProfileByHandle(this.props.match.params.handle);
     }
+    
   }
+
+
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.profile.profile === null && this.props.profile.loading) {
       this.props.history.push('/not-found');
     }
+   
   }
 
   render() {
     const { profile, loading } = this.props.profile;
     const { auth } = this.props;
-    // console.log(profile);
+
     let profileContent;
 
     if (profile === null || loading) {
       profileContent = <Spinner />;
     } else {
+
       profileContent = (
         <div>
           <div className="row">
@@ -44,6 +49,7 @@ class Profile extends Component {
           <ProfileHeader profile={profile} />
           <ProfileAbout profile={profile} />
           {auth.user.id === profile.user._id? <Form /> : null}
+          {/* <IndivPosts /> */}
         </div>
       );
     }
@@ -70,6 +76,7 @@ Profile.propTypes = {
 const mapStateToProps = state => ({
   profile: state.profile,
   auth: state.auth,
+
 });
 
 export default connect(mapStateToProps, { getCurrentProfile, getProfileByHandle })(Profile);

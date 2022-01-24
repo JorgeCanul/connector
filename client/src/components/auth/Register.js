@@ -50,7 +50,7 @@ import { registerUser } from '../../actions/authActions';
           <div className="row">
             <div className="col-md-8 m-auto">
               <h1 className='lead text-center'>Sing Up</h1>
-              <p className="lead text-center">Create Your Devconnector Account</p>
+              <p className="lead text-center">Create Your Connector Account</p>
               <form noValidate onSubmit={this.onSubmit}>
                 <div className='form-group'>
                   <input type="text" className={classnames("form-control form-control-lg", {"is-invalid" : errors.name})}

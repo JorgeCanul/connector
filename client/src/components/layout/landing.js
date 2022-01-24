@@ -12,12 +12,12 @@ import { connect } from 'react-redux';
    render() {
     return (
       <div className='landing'>
-        <div className='dark-overlay landing-inner'>
+        <div className='landing-inner'>
           <div className='container'>
             <div className='row'>
-              <div className='col-md-12 text-center'>
-                <h1 className='display-3 mb-4'>Developer Connector</h1>
-                <p className='laed'>Create Your Profile, share posts and get to know developers</p>
+              <div className='col-md-12 success text-center'>
+                <h1 className='display-4 mb-4 text-center text-white'>Connector</h1>
+                <p className='laed text-white'>Create Your Profile, Share Posts and Get to Know Others</p>
                 <hr/>
                 <Link to="/register" className='btn btn-lg btn-info mr-2'>Sign Up</Link>
                 <Link to="/login" className='btn btn-lg btn-light'>Login</Link>

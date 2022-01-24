@@ -1,8 +1,8 @@
-import { CREATE_POST, GET_POST, DELETE_POST, POST_LOADING, GET_POSTS } from "../actions/types";
+import { CREATE_POST, GET_POST, DELETE_POST, POST_LOADING, GET_POSTS, INDIVIDUAL_POSTS } from "../actions/types";
 
 const initialState = {
   posts: [],
-  // post: {},
+  indiPosts: [],
   loading: false
 };
 
@@ -13,13 +13,18 @@ export default function(state = initialState, action ) {
         ...state,
         loading: true
       }
-   
     case GET_POST:
       return {
         ...state,
         posts: action.payload,
         loading: false
       }
+      case INDIVIDUAL_POSTS:
+        return {
+          ...state,
+          indiPosts: action.payload,
+          loading: false
+        }
     case GET_POSTS:
       return {
         ...state,

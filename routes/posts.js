@@ -50,19 +50,16 @@ router.get("/posts/:id",
     .sort({date: -1})
     .populate("user", ["name", "avatar", "email"])
     .then((posts) => {
-      if (!posts || posts.length <= 0) {
-        errors.noposts = "There is no Posts for this user";
-        return res.status(404).json(errors);
-        // console.log('No posts')
-      } 
-        return res.status(200).json(posts)
-        // console.log(posts)
-
-
+      if(posts.length > 0) {
+       return res.status(200).json(posts)
+      } else {
+        errors.noposts = "There is no posts for this user"
+        res.status(404).json(errors);
+      }
     })
-    .catch((err) =>
-      res.status(404).json({ posts: "There is no posts for this user" })
-    );
+    .catch((err) => {
+      res.status(404).json(err);
+    });
 });
 
 ////////////////////////////////////////////////////

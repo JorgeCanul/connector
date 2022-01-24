@@ -15,7 +15,6 @@ class Posts extends Component {
   componentDidMount() {
     this.props.getPosts();
     this.props.getProfiles();
-
   }
 
   render() {
@@ -26,8 +25,7 @@ class Posts extends Component {
     if (posts === null || loading || !Object.entries(posts)) {
       postContent = <Spinner />;
     } else {
-      console.log(posts);
-      console.log(profiles)
+      // console.log(posts);
         postContent = posts.map(posts => <PostItem loading={loading} key={posts._id} profiles={profiles.map(profiles => profiles)}  posts={posts} />)  
     }
 
@@ -36,8 +34,8 @@ class Posts extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <Link to="/feed" className="btn btn-light mb-3">
-                Back To Feed
+              <Link to="/profiles" className="btn btn-light mb-3">
+                Back To Profiles
               </Link>
               {postContent}
             </div>
