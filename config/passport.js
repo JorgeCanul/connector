@@ -3,6 +3,7 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 const keys = require('./keys');
 const User = require('../models/User');
 
+
 const opts={};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = keys.secretOrKey;
@@ -13,7 +14,6 @@ module.exports = passport => {
       User.findById(payload.id)
         .then(user => {
           if (user){
-            console.log(user)
             return done(null, user);
           }
           return done(null, false);
