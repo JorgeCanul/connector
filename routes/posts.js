@@ -27,8 +27,8 @@ router.post('/posts', passport.authenticate('jwt',
 //@access Public
 router.get('/posts', (req, res) => {
   PostMessage.find()
-  .populate("user", ["name", "avatar", "email"])
   .sort({date: -1})
+  .populate("user", ["name", "avatar", "email"])
   .then(postMessages => {
     if(postMessages) {
       res.status(200).json(postMessages);
