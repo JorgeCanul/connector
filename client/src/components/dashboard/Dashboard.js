@@ -26,6 +26,7 @@ class Dashboard extends Component {
     let dashboardContent;
 
     if (profile === null || loading) {
+      console.log(profile);
       dashboardContent = <Spinner />;
     } else {
       // Check if logged and if user has profile data
